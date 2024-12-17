@@ -26,7 +26,7 @@ jobs:
       - name: Upload Web Export
         uses: actions/upload-artifact@v4.4.3
         with:
-          name: web_export.zip
+          name: web_export
           path: /home/runner/.local/share/godot/builds/Web/*
           include-hidden-files: true
 
@@ -46,3 +46,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: web_export

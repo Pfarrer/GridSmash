@@ -1,4 +1,9 @@
+class_name GameController
 extends Object
 
 
-class_name GameController
+var game_clock: GameClock
+
+
+func _init(game_clock: GameClock):
+	self.game_clock = game_clock

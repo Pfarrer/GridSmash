@@ -22,3 +22,10 @@ jobs:
           relative_project_path: ./
           archive_output: true
           cache: true
+
+      - name: Upload Web Export
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: web_export.zip
+          path: /home/runner/.local/share/godot/builds/Web/*
+          include-hidden-files: true

@@ -1,25 +1,29 @@
 extends VBoxContainer
 
 
-@export_node_path("Timer") var roundTimer: NodePath
-
-
 @onready var roundNumberLabel: Label = $GridContainer/RoundNumber
 @onready var nextRoundInLabel: Label = $GridContainer/NextRoundIn
+@onready var incomeLabel: Label = $GridContainer/Income
+
+
+var game_controller: GameController
 
 
 func _ready() -> void:
+	assert(game_controller)
+	
 	roundNumberLabel.text = "1"
-	get_node(roundTimer).timeout.connect(_increment_roundNumber)
+	nextRoundInLabel.text = str(GameController.SECONDS_PER_ROUND)
+	incomeLabel.text = str(GameController.INITIAL_INCOME)
+	
+	game_controller.round_changed.connect(_on_next_round)
+	game_controller.clock_ticked.connect(_on_clock_tick)
+	game_controller.income_changed.connect(_on_clock_tick)
 
 
-func _process(delta: float) -> void:
-	_update_nextRoundIn()
+func _on_next_round(round_number: int) -> void:
+	roundNumberLabel.text = str(round_number)
 
 
-func _increment_roundNumber() -> void:
-	roundNumberLabel.text = str(int(roundNumberLabel.text) + 1)
-
-
-func _update_nextRoundIn():
-	nextRoundInLabel.text = str(ceil((get_node(roundTimer) as Timer).time_left))
+func _on_clock_tick(time_remaining_in_round: int):
+	nextRoundInLabel.text = str(time_remaining_in_round)

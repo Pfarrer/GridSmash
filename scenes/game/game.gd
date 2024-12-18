@@ -1,14 +1,18 @@
 extends HBoxContainer
 
 
-@export var map: PackedScene
+@export var map_scene: PackedScene
 
 
-# Called when the node enters the scene tree for the first time.
+var game_controller: GameController
+
+
 func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	game_controller = GameController.new($GameTimer.timeout)
+	
+	var map = map_scene.instantiate()
+	$MapContainer.add_child(map)
+	
+	var menu = preload("res://scenes/game/menu/menu.tscn").instantiate()
+	menu.game_controller = game_controller
+	$MenuContainer.add_child(menu)

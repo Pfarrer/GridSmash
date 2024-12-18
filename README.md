@@ -1,1 +1,1 @@
-# GridSmashTD
+# GridSmash

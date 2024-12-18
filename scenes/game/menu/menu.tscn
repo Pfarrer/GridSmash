@@ -7,6 +7,7 @@ script = ExtResource("1_2vyx5")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 columns = 2
 
 [node name="Label1" type="Label" parent="GridContainer"]

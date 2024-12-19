@@ -15,8 +15,5 @@ script = ExtResource("1_d67lw")
 [node name="CreepPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_cr0dw")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="CreepPath"]
-position = Vector2(-48, 160)
-rotation = -0.625485
-
 [node name="Line2d" type="Line2D" parent="CreepPath"]
+width = 24.0

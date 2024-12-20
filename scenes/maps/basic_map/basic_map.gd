@@ -1,11 +1,8 @@
-extends Node2D
-
+extends Area2D
 
 var creep_scene = preload("res://scenes/creep/creep.tscn")
 
-
 var game_controller: GameController
-
 
 func _ready() -> void:
 	$CreepPath/Line2d.points = $CreepPath.curve.get_baked_points()
@@ -14,4 +11,5 @@ func _ready() -> void:
 
 func _on_creep_spawned():
 	var creep = creep_scene.instantiate()
+	creep.game_controller = game_controller
 	$CreepPath.add_child(creep)

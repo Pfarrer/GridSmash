@@ -1,25 +1,24 @@
 class_name GameController
 
-
+const INITIAL_LIVES = 20
 const SECONDS_PER_ROUND = 15
 const INITIAL_INCOME = 100
 const INITIAL_CREDITS = 1000
 const CREEP_PRICE = 100
 const CREEP_INCOME_INCREASE = 10
 
-
+signal lives_changed(remaining_lives: int)
 signal round_changed(round_number: int)
 signal clock_ticked(time_remaining_in_current_round: int)
 signal income_changed(new_income: int)
 signal credits_changed(new_credits: int)
 signal creep_spawned()
 
-
+var _lives: int = INITIAL_LIVES
 var _round_number: int = 1
 var _time_remaining_in_current_round: int = SECONDS_PER_ROUND
 var _income: int = INITIAL_INCOME
 var _credits: int = INITIAL_CREDITS
-
 
 func send_creep():
 	if _credits >= CREEP_PRICE:
@@ -30,6 +29,15 @@ func send_creep():
 		income_changed.emit(_income)
 		
 		creep_spawned.emit()
+
+
+func creep_passed():
+	_lives -= 1
+	lives_changed.emit(_lives)
+	
+	if _lives == 0:
+		print("game over")
+
 
 func _init(game_clock: Signal):
 	game_clock.connect(_on_clock_tick)

@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://tjq46r7fuyam"]
+[gd_scene load_steps=4 format=3 uid="uid://tjq46r7fuyam"]
 
 [ext_resource type="Script" path="res://scenes/maps/basic_map/basic_map.gd" id="1_d67lw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52552"]
+size = Vector2(704, 640)
 
 [sub_resource type="Curve2D" id="Curve2D_cr0dw"]
 bake_interval = 10.0
@@ -9,11 +12,17 @@ _data = {
 }
 point_count = 11
 
-[node name="BasicMap" type="Node2D"]
+[node name="BasicMap" type="Area2D"]
 script = ExtResource("1_d67lw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(352, 320)
+shape = SubResource("RectangleShape2D_52552")
 
 [node name="CreepPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_cr0dw")
 
 [node name="Line2d" type="Line2D" parent="CreepPath"]
 width = 24.0
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

@@ -1,27 +1,31 @@
 extends MarginContainer
 
-
+@onready var livesRemainingLabel: Label = $VBoxContainer/GridContainer/LivesRemaining
 @onready var roundNumberLabel: Label = $VBoxContainer/GridContainer/RoundNumber
 @onready var nextRoundInLabel: Label = $VBoxContainer/GridContainer/NextRoundIn
 @onready var incomeLabel: Label = $VBoxContainer/GridContainer/Income
 @onready var creditsLabel: Label = $VBoxContainer/GridContainer/Credits
 
-
 var game_controller: GameController
-
 
 func _ready() -> void:
 	assert(game_controller)
 	
+	livesRemainingLabel.text = str(GameController.INITIAL_LIVES)
 	roundNumberLabel.text = "1"
 	nextRoundInLabel.text = str(GameController.SECONDS_PER_ROUND)
 	incomeLabel.text = str(GameController.INITIAL_INCOME)
 	creditsLabel.text = str(GameController.INITIAL_CREDITS)
 	
+	game_controller.lives_changed.connect(_on_lives_changed)
 	game_controller.round_changed.connect(_on_round_changed)
 	game_controller.clock_ticked.connect(_on_clock_ticked)
 	game_controller.income_changed.connect(_on_income_changed)
 	game_controller.credits_changed.connect(_on_credits_changed)
+
+
+func _on_lives_changed(lives_remaining: int) -> void:
+	livesRemainingLabel.text = str(lives_remaining)
 
 
 func _on_round_changed(round_number: int) -> void:

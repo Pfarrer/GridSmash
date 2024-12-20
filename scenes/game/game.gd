@@ -1,11 +1,8 @@
 extends HBoxContainer
 
-
 @export var map_scene: PackedScene
 
-
 var game_controller: GameController
-
 
 func _ready() -> void:
 	game_controller = GameController.new($GameTimer.timeout)

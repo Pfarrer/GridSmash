@@ -13,4 +13,10 @@ func _ready() -> void:
 	
 	var menu = preload("res://scenes/game/menu/menu.tscn").instantiate()
 	menu.game_controller = game_controller
+	menu.build_tower.connect(_on_build_tower)
 	$MenuContainer.add_child(menu)
+
+
+func _on_build_tower():
+	var build_layer = preload("res://scenes/game/build_layer/build_layer.tscn").instantiate()
+	self.add_child(build_layer)

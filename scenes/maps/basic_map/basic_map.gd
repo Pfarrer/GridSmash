@@ -1,5 +1,6 @@
 extends Node2D
 
+var structure_scene = preload("res://scenes/structure/structure.tscn")
 var creep_scene = preload("res://scenes/creep/creep.tscn")
 
 var game_controller: GameController
@@ -10,10 +11,18 @@ func _ready() -> void:
 	$CreepPath/Line2d.points = $CreepPath.curve.get_baked_points()
 	add_path_collision_shapes($CreepPath.curve.get_baked_points())
 	
-	game_controller.creep_spawned.connect(_on_creep_spawned)
+	game_controller.structure_placed.connect(on_structure_placed)
+	game_controller.creep_spawned.connect(on_creep_spawned)
 
 
-func _on_creep_spawned():
+func on_structure_placed(structure: Structure):
+	var structure_scene_instance = structure_scene.instantiate()
+	structure_scene_instance.game_controller = game_controller
+	structure_scene_instance.structure = structure
+	$Structures.add_child(structure_scene_instance)
+
+
+func on_creep_spawned():
 	var creep = creep_scene.instantiate()
 	creep.game_controller = game_controller
 	$CreepPath.add_child(creep)

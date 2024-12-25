@@ -19,4 +19,5 @@ func _ready() -> void:
 
 func _on_build_tower():
 	var build_layer = preload("res://scenes/game/build_layer/build_layer.tscn").instantiate()
-	self.add_child(build_layer)
+	build_layer.game_controller = game_controller
+	$MapContainer.add_child(build_layer)

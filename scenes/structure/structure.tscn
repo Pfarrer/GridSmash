@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcvog553nx4nu"]
+
+[ext_resource type="Script" path="res://scenes/structure/structure.gd" id="1_16sxx"]
+[ext_resource type="Script" path="res://scenes/structure/range_circle.gd" id="2_rl8pn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5r6dg"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_61fpf"]
+radius = 80.0
+
+[node name="Structure" type="Node2D"]
+script = ExtResource("1_16sxx")
+
+[node name="StructureArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StructureArea"]
+shape = SubResource("CircleShape2D_5r6dg")
+
+[node name="RangeArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
+shape = SubResource("CircleShape2D_61fpf")
+
+[node name="RangeCircle" type="Node2D" parent="."]
+visible = false
+script = ExtResource("2_rl8pn")
+
+[connection signal="area_entered" from="RangeArea" to="." method="on_creep_in_range"]
+[connection signal="area_exited" from="RangeArea" to="." method="on_creep_out_of_range"]

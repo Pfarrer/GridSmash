@@ -5,16 +5,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ul2g"]
 radius = 20.2485
 
-[node name="BuildLayer" type="CanvasLayer"]
-
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D"]
 modulate = Color(1, 1, 1, 0.501961)
 script = ExtResource("2_8as1i")
 
-[node name="Area2D" type="Area2D" parent="Node2D"]
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 257
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_3ul2g")
 
-[connection signal="area_entered" from="Node2D/Area2D" to="Node2D" method="_on_path_collision_start"]
-[connection signal="area_exited" from="Node2D/Area2D" to="Node2D" method="_on_path_collision_end"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_path_collision_start"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_path_collision_end"]

@@ -13,7 +13,7 @@ signal round_changed(round_number: int)
 signal clock_ticked(time_remaining_in_current_round: int)
 signal income_changed(new_income: int)
 signal credits_changed(new_credits: int)
-signal creep_spawned()
+signal creep_spawned(creep: Creep)
 signal structure_placed(position: Vector2)
 
 var _lives: int = INITIAL_LIVES
@@ -22,6 +22,7 @@ var _time_remaining_in_current_round: int = SECONDS_PER_ROUND
 var _income: int = INITIAL_INCOME
 var _credits: int = INITIAL_CREDITS
 var structures: Array = []
+var creeps: Array = []
 
 func _init(game_clock: Signal):
 	game_clock.connect(_on_clock_tick)
@@ -29,13 +30,16 @@ func _init(game_clock: Signal):
 
 func send_creep():
 	if _credits >= CREEP_PRICE:
+		var creep = Creep.new()
+		
 		_credits -= CREEP_PRICE
 		credits_changed.emit(_credits)
 		
 		_income += CREEP_INCOME_INCREASE
 		income_changed.emit(_income)
 		
-		creep_spawned.emit()
+		creeps.append(creep)
+		creep_spawned.emit(creep)
 
 
 func creep_passed():

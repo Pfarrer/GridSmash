@@ -22,10 +22,11 @@ func on_structure_placed(structure: Structure):
 	$Structures.add_child(structure_scene_instance)
 
 
-func on_creep_spawned():
-	var creep = creep_scene.instantiate()
-	creep.game_controller = game_controller
-	$CreepPath.add_child(creep)
+func on_creep_spawned(creep: Creep):
+	var creep_scence_instance = creep_scene.instantiate()
+	creep_scence_instance.game_controller = game_controller
+	creep_scence_instance.creep = creep
+	$CreepPath.add_child(creep_scence_instance)
 
 
 func add_path_collision_shapes(points: PackedVector2Array):

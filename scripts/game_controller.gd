@@ -28,9 +28,11 @@ func _init(game_clock: Signal):
 	game_clock.connect(_on_clock_tick)
 
 
-func send_creep():
+func send_creep() -> Creep:
 	if _credits >= CREEP_PRICE:
 		var creep = Creep.new()
+		creeps.append(creep)
+		creep.destroyed.connect(_remove_creep)
 		
 		_credits -= CREEP_PRICE
 		credits_changed.emit(_credits)
@@ -38,8 +40,10 @@ func send_creep():
 		_income += CREEP_INCOME_INCREASE
 		income_changed.emit(_income)
 		
-		creeps.append(creep)
 		creep_spawned.emit(creep)
+		return creep
+	else:
+		return null
 
 
 func creep_passed():
@@ -73,3 +77,11 @@ func _on_clock_tick() -> void:
 		_time_remaining_in_current_round -= 1
 	
 	clock_ticked.emit(_time_remaining_in_current_round)
+
+
+func _remove_creep(creep: Creep):
+	var idx = creeps.find(creep)
+	if idx == -1:
+		print("Supposed to remove creep from creeps list, but was not found.")
+	else:
+		creeps.remove_at(idx)

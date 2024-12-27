@@ -12,12 +12,12 @@ func _ready() -> void:
 	creep.destroyed.connect(on_destroyed)
 
 
-func _process(delta):
+func _process(delta: float):
 	self.progress += 100 * delta
 	creep.position = self.position
 
 
-func on_destroyed():
+func on_destroyed(_creep: Creep):
 	creep_root.queue_free()
 
 

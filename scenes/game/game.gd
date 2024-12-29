@@ -5,7 +5,7 @@ extends HBoxContainer
 var game_controller: GameController
 
 func _ready() -> void:
-	game_controller = GameController.new($GameTimer.timeout)
+	assert(game_controller)
 	
 	var map = map_scene.instantiate()
 	map.game_controller = game_controller
@@ -15,6 +15,8 @@ func _ready() -> void:
 	menu.game_controller = game_controller
 	menu.build_tower.connect(_on_build_tower)
 	$MenuContainer.add_child(menu)
+	
+	game_controller.after_game_initialized()
 
 
 func _on_build_tower():

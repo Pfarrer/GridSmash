@@ -16,6 +16,9 @@ signal credits_changed(new_credits: int)
 signal creep_spawned(creep: Creep)
 signal structure_placed(position: Vector2)
 
+# INPUT
+var enable_seed_game_state: bool = false
+
 var _lives: int = INITIAL_LIVES
 var _round_number: int = 1
 var _time_remaining_in_current_round: int = SECONDS_PER_ROUND
@@ -58,10 +61,21 @@ func build(position: Vector2) -> void:
 	if _credits >= STRUCTURE_PRICE:
 		_credits -= STRUCTURE_PRICE
 		credits_changed.emit(_credits)
-		
+
 		var structure = Structure.new(position)
 		structures.append(structure)
 		structure_placed.emit(structure)
+
+
+func after_game_initialized():
+	if enable_seed_game_state:
+		_credits += 2 * GameController.STRUCTURE_PRICE + GameController.CREEP_PRICE 
+		build(Vector2(195, 132))
+		build(Vector2(359, 122))
+		
+		clock_ticked.connect(func (_t1: int):
+			send_creep()
+		, ConnectFlags.CONNECT_ONE_SHOT)
 
 
 func _on_clock_tick() -> void:

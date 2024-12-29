@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwy68w28i3dlx"]
+[gd_scene load_steps=3 format=3 uid="uid://bwy68w28i3dlx"]
 
 [ext_resource type="Script" path="res://scenes/start.gd" id="1_45hx8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a2n4h"]
+font_size = 34
+outline_size = 5
+outline_color = Color(0.716937, 0.508182, 0.370737, 1)
+shadow_size = 0
 
 [node name="Start" type="Control"]
 layout_mode = 3
@@ -11,35 +17,33 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_45hx8")
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -99.0
-offset_top = -22.5
-offset_right = 99.0
-offset_bottom = 22.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Start Single Player Game"
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -104.5
-offset_top = -223.5
-offset_right = 104.5
-offset_bottom = -200.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
 text = "GridSmash"
+label_settings = SubResource("LabelSettings_a2n4h")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Button" to="." method="_on_start_button_pressed"]
+[node name="MapControl" type="OptionButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "Basic Map"
+
+[node name="DevStateControl" type="CheckButton" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Init Dev State"
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Single Player Game"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_start_button_pressed"]

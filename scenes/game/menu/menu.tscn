@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckf6bg0ugqtid"]
+[gd_scene load_steps=3 format=3 uid="uid://ckf6bg0ugqtid"]
 
 [ext_resource type="Script" path="res://scenes/game/menu/menu.gd" id="1_2vyx5"]
+[ext_resource type="Script" path="res://scenes/game/menu/tower_buttons.gd" id="2_psecc"]
 
 [node name="VBoxContainer" type="MarginContainer"]
 custom_minimum_size = Vector2(300, 0)
@@ -62,6 +63,13 @@ text = "Credits"
 layout_mode = 2
 horizontal_alignment = 2
 
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SendCreepsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Send Creeps"
+
 [node name="CreepContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 
@@ -69,12 +77,26 @@ layout_mode = 2
 layout_mode = 2
 text = "Creep"
 
-[node name="TowerContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/TowerContainer"]
+[node name="BuildStructuresLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Tower"
+text = "Build"
+
+[node name="TowerButtons" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 5
+script = ExtResource("2_psecc")
+
+[node name="GridNodeButton" type="Button" parent="VBoxContainer/TowerButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "GN"
+
+[node name="LaserTowerButton" type="Button" parent="VBoxContainer/TowerButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "LT"
 
 [connection signal="pressed" from="VBoxContainer/CreepContainer/Button" to="." method="_on_creep_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/TowerContainer/Button" to="." method="_on_tower_button_pressed"]

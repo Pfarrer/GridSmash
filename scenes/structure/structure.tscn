@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://scenes/structure/structure.gd" id="1_16sxx"]
 [ext_resource type="Script" path="res://scenes/structure/range_circle.gd" id="2_rl8pn"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5r6dg"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ld8l"]
+resource_local_to_scene = true
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_61fpf"]
@@ -17,11 +18,12 @@ collision_layer = 4
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureArea"]
-shape = SubResource("CircleShape2D_5r6dg")
+shape = SubResource("CircleShape2D_6ld8l")
 
 [node name="RangeArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
 shape = SubResource("CircleShape2D_61fpf")

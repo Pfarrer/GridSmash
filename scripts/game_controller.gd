@@ -14,7 +14,7 @@ signal clock_ticked(time_remaining_in_current_round: int)
 signal income_changed(new_income: int)
 signal credits_changed(new_credits: int)
 signal creep_spawned(creep: Creep)
-signal structure_placed(position: Vector2)
+signal structure_placed(structure: Structure)
 
 # INPUT
 var enable_seed_game_state: bool = false
@@ -57,12 +57,13 @@ func creep_passed():
 		print("game over")
 
 
-func build(position: Vector2) -> void:
+func build(structure: Structure) -> void:
 	if _credits >= STRUCTURE_PRICE:
+		structure.is_floating = false
+
 		_credits -= STRUCTURE_PRICE
 		credits_changed.emit(_credits)
 
-		var structure = Structure.new(position)
 		structures.append(structure)
 		structure_placed.emit(structure)
 
@@ -70,8 +71,8 @@ func build(position: Vector2) -> void:
 func after_game_initialized():
 	if enable_seed_game_state:
 		_credits += 2 * GameController.STRUCTURE_PRICE + GameController.CREEP_PRICE 
-		build(Vector2(195, 132))
-		build(Vector2(359, 122))
+		build(AffectingStructure.new(Vector2(195, 132)))
+		build(AffectingStructure.new(Vector2(359, 122)))
 		
 		clock_ticked.connect(func (_t1: int):
 			send_creep()

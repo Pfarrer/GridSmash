@@ -5,15 +5,16 @@ const COLOR_COLLISION = Color.RED
 const COLOR_AREA_LINE = Color.GRAY
 
 var game_controller: GameController
-var collisions = 0
+var structure_type: Variant
 
+var collisions = 0
 var structure: Structure
 var structure_scene: Node
 
 func _ready() -> void:
 	assert(game_controller)
 	
-	structure = Structure.new(Vector2.ZERO)
+	structure = structure_type.new(Vector2.ZERO)
 	structure.is_floating = true
 	
 	structure_scene = preload("res://scenes/structure/structure.tscn").instantiate()
@@ -37,7 +38,7 @@ func _process(_delta: float):
 
 func _draw():
 	if collisions > 0:
-		draw_circle(Vector2(0,0), 20.0, COLOR_COLLISION, true, -1, true)
+		draw_circle(Vector2(0,0), structure.structure_radius, COLOR_COLLISION, true, -1, true)
 		structure_scene.hide()
 	else:
 		structure_scene.show()
@@ -56,4 +57,4 @@ func on_collision_end(_node: Node) -> void:
 func on_mouse_click():
 	if collisions == 0:
 		structure.position = position
-		game_controller.build(position)
+		game_controller.build(structure)

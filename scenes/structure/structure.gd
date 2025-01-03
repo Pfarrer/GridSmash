@@ -8,11 +8,15 @@ func _ready() -> void:
 	assert(structure)
 	
 	position = structure.position
+	$StructureArea/CollisionShape2D.shape.radius = structure.structure_radius
 	
-	structure.creep_affected.connect(on_creep_affected)
-	
-	$AffectTimer.wait_time = structure.affect_interval_ms / 1000.
-	$AffectTimer.start()
+	if is_instance_of(structure, AffectingStructure):
+		$RangeArea/CollisionShape2D.shape.radius = structure.affect_radius
+		$RangeArea.monitoring = true
+		structure.creep_affected.connect(on_creep_affected)
+		
+		$AffectTimer.wait_time = structure.affect_interval_ms / 1000.
+		$AffectTimer.start()
 
 
 func _draw():

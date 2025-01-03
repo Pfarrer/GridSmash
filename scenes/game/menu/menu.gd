@@ -1,6 +1,6 @@
 extends MarginContainer
 
-signal build_tower()
+signal build_structure(structure_type: Variant)
 
 @onready var lives_remaining_label: Label = $VBoxContainer/GridContainer/LivesRemaining
 @onready var round_number_label: Label = $VBoxContainer/GridContainer/RoundNumber
@@ -48,7 +48,3 @@ func _on_credits_changed(new_credits: int):
 
 func _on_creep_button_pressed() -> void:
 	game_controller.send_creep()
-
-
-func _on_tower_button_pressed() -> void:
-	build_tower.emit()

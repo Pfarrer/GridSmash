@@ -1,10 +1,8 @@
-class_name Structure
+class_name AffectingStructure
+extends Structure
 
 signal creep_affected(creep: Creep)
 
-var is_floating = false
-var position: Vector2
-var structure_radius = 20
 var affect_radius = 80
 var affect_interval_ms = 800
 var affect_damage = 20
@@ -12,8 +10,8 @@ var affect_damage = 20
 var affect_ready = false
 var creeps_in_range: Array = []
 
-func _init(position: Vector2) -> void:
-	self.position = position
+func _init(pos: Vector2) -> void:
+	super(pos, 20)
 
 
 func set_creep_in_range(creep: Creep) -> void:

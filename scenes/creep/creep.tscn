@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b7c6vyrwa2i73"]
 
-[ext_resource type="Texture2D" uid="uid://yyt6xlki4iiv" path="res://assets/icon.svg" id="1_6nglk"]
 [ext_resource type="Script" path="res://scenes/creep/creep.gd" id="1_ogr07"]
+[ext_resource type="Texture2D" uid="uid://cu81ejes3lxrv" path="res://assets/creeps/creep1.svg" id="2_mxtet"]
 [ext_resource type="Script" path="res://scenes/creep/creep_area.gd" id="3_v8sc7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dc8mq"]
@@ -13,7 +13,8 @@ loop = false
 script = ExtResource("1_ogr07")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_6nglk")
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_mxtet")
 
 [node name="CreepArea" type="Area2D" parent="."]
 collision_layer = 2

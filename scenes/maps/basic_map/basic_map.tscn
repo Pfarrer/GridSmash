@@ -20,6 +20,7 @@ curve = SubResource("Curve2D_cr0dw")
 
 [node name="Line2d" type="Line2D" parent="CreepPath"]
 width = 24.0
+default_color = Color(0, 0, 0, 1)
 
 [node name="PathArea" type="StaticBody2D" parent="."]
 collision_mask = 0

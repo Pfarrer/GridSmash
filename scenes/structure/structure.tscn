@@ -14,7 +14,7 @@ script = ExtResource("1_16sxx")
 
 [node name="StructureArea" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureArea"]
 shape = SubResource("CircleShape2D_5r6dg")

@@ -2,6 +2,7 @@ class_name Structure
 
 signal creep_affected(creep: Creep)
 
+var is_floating = false
 var position: Vector2
 var structure_radius = 20
 var affect_radius = 80
@@ -37,7 +38,7 @@ func set_affect_ready() -> void:
 
 
 func trigger_affect_if_possible() -> void:
-	if affect_ready && !creeps_in_range.is_empty():
+	if !is_floating && affect_ready && !creeps_in_range.is_empty():
 		var target_creep = creeps_in_range.front()
 		creep_affected.emit(target_creep)
 		target_creep.handle_affect(affect_damage)

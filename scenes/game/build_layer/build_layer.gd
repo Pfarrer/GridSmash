@@ -5,7 +5,24 @@ const COLOR_COLLISION = Color.RED
 const COLOR_AREA_LINE = Color.GRAY
 
 var game_controller: GameController
-var is_colliding = false
+var collisions = 0
+
+var structure: Structure
+var structure_scene: Node
+
+func _ready() -> void:
+	assert(game_controller)
+	
+	structure = Structure.new(Vector2.ZERO)
+	structure.is_floating = true
+	
+	structure_scene = preload("res://scenes/structure/structure.tscn").instantiate()
+	structure_scene.game_controller = game_controller
+	structure_scene.structure = structure
+	structure_scene.connect_to_structure_area_collisions(on_collision_start, on_collision_end)
+	structure_scene.show_range()
+	add_child(structure_scene)
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action("mouse_click"):
@@ -19,21 +36,24 @@ func _process(_delta: float):
 
 
 func _draw():
-	var tower_color = COLOR_COLLISION if is_colliding else COLOR_OK
-	draw_circle(Vector2(0,0), 20.0, tower_color, true, -1, true)
-	draw_circle(Vector2(0,0), 80.0, COLOR_AREA_LINE, false, 2.0, true)
+	if collisions > 0:
+		draw_circle(Vector2(0,0), 20.0, COLOR_COLLISION, true, -1, true)
+		structure_scene.hide()
+	else:
+		structure_scene.show()
 
 
-func _on_path_collision_start(_node: Node) -> void:
-	is_colliding = true
+func on_collision_start(_node: Node) -> void:
+	collisions += 1
 	queue_redraw()
 
 
-func _on_path_collision_end(_node: Node) -> void:
-	is_colliding = false
+func on_collision_end(_node: Node) -> void:
+	collisions -= 1
 	queue_redraw()
 
 
 func on_mouse_click():
-	if !is_colliding:
+	if collisions == 0:
+		structure.position = position
 		game_controller.build(position)

@@ -1,19 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://jkd2sfyvjeo4"]
+[gd_scene load_steps=2 format=3 uid="uid://jkd2sfyvjeo4"]
 
 [ext_resource type="Script" path="res://scenes/game/build_layer/build_layer.gd" id="2_8as1i"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_3ul2g"]
-radius = 20.2485
 
 [node name="BuildLayer" type="Node2D"]
 modulate = Color(1, 1, 1, 0.501961)
 script = ExtResource("2_8as1i")
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_3ul2g")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_path_collision_start"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_path_collision_end"]

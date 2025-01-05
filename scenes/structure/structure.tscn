@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcvog553nx4nu"]
+[gd_scene load_steps=6 format=3 uid="uid://bcvog553nx4nu"]
 
 [ext_resource type="Script" path="res://scenes/structure/structure.gd" id="1_16sxx"]
+[ext_resource type="Script" path="res://scenes/structure/structure_area.gd" id="2_4brl8"]
 [ext_resource type="Script" path="res://scenes/structure/range_circle.gd" id="2_rl8pn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ld8l"]
@@ -16,14 +17,14 @@ script = ExtResource("1_16sxx")
 [node name="StructureArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 5
+script = ExtResource("2_4brl8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureArea"]
 shape = SubResource("CircleShape2D_6ld8l")
 
 [node name="RangeArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
-monitoring = false
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
 shape = SubResource("CircleShape2D_61fpf")
@@ -35,6 +36,4 @@ script = ExtResource("2_rl8pn")
 [node name="AffectTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="area_entered" from="RangeArea" to="." method="on_creep_in_range"]
-[connection signal="area_exited" from="RangeArea" to="." method="on_creep_out_of_range"]
 [connection signal="timeout" from="AffectTimer" to="." method="on_affect_timer_timeout"]

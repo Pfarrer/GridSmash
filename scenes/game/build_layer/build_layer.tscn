@@ -5,3 +5,5 @@
 [node name="BuildLayer" type="Node2D"]
 modulate = Color(1, 1, 1, 0.501961)
 script = ExtResource("2_8as1i")
+
+[node name="GridConnections" type="Node2D" parent="."]

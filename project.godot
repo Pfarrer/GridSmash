@@ -35,7 +35,7 @@ mouse_click={
 
 2d_physics/layer_1="Creep path"
 2d_physics/layer_2="Creeps"
-2d_physics/layer_3="Towers"
+2d_physics/layer_3="Structures"
 2d_physics/layer_4="Shots"
 2d_physics/layer_5="Map Area"
 

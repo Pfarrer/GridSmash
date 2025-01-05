@@ -34,6 +34,9 @@ func _input(event: InputEvent) -> void:
 
 func _process(_delta: float):
 	position = get_viewport().get_mouse_position()
+	
+	if is_instance_of(structure, GridNodeStructure):
+		update_grid_node_connections()
 
 
 func _draw():
@@ -58,3 +61,16 @@ func on_mouse_click():
 	if collisions == 0:
 		structure.position = position
 		game_controller.build(structure)
+
+
+func update_grid_node_connections():
+	for child in $GridConnections.get_children():
+		child.free()
+
+	if collisions == 0:
+		var grid_connection_packed = preload("res://scenes/structure/grid_connection/grid_connection.tscn")
+		for drain_structure in structure.connections:
+			var grid_connection = grid_connection_packed.instantiate()
+			grid_connection.position_source = Vector2.ZERO
+			grid_connection.position_drain = drain_structure.position - position
+			$GridConnections.add_child(grid_connection)

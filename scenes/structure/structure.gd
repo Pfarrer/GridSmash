@@ -12,11 +12,18 @@ func _ready() -> void:
 	
 	if is_instance_of(structure, AffectingStructure):
 		$RangeArea/CollisionShape2D.shape.radius = structure.affect_radius
-		$RangeArea.monitoring = true
-		structure.creep_affected.connect(on_creep_affected)
+		$RangeArea.set_collision_mask_value(Constants.COLLISION_LAYER_CREEPS, true)
+		$RangeArea.area_entered.connect(on_creep_in_range)
+		$RangeArea.area_exited.connect(on_creep_out_of_range)
 		
 		$AffectTimer.wait_time = structure.affect_interval_ms / 1000.
 		$AffectTimer.start()
+		structure.creep_affected.connect(on_creep_affected)
+	elif is_instance_of(structure, GridNodeStructure):
+		$RangeArea/CollisionShape2D.shape.radius = structure.max_connection_length
+		$RangeArea.set_collision_mask_value(Constants.COLLISION_LAYER_STRUCTURES, true)
+		$RangeArea.area_entered.connect(on_structure_in_range)
+		$RangeArea.area_exited.connect(on_structure_out_of_range)
 
 
 func _draw():
@@ -57,3 +64,15 @@ func hide_range() -> void:
 func connect_to_structure_area_collisions(on_start: Callable, on_end: Callable):
 	$StructureArea.connect("area_entered", on_start)
 	$StructureArea.connect("area_exited", on_end)
+
+
+func on_structure_in_range(area: Area2D) -> void:
+	var drain_structure: Structure = area.get_structure()
+	if structure != drain_structure:
+		structure.add_grid_connection(drain_structure)
+
+
+func on_structure_out_of_range(area: Area2D) -> void:
+	var drain_structure: Structure = area.get_structure()
+	if structure != drain_structure:
+		structure.remove_grid_connection(drain_structure)

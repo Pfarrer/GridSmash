@@ -10,20 +10,18 @@ func _ready() -> void:
 	position = structure.position
 	$StructureArea/CollisionShape2D.shape.radius = structure.structure_radius
 	
+	$GridConnectionRangeArea/CollisionShape2D.shape.radius = structure.max_grid_connection_length
+	$GridConnectionRangeArea.area_entered.connect(on_structure_in_range)
+	$GridConnectionRangeArea.area_exited.connect(on_structure_out_of_range)
+	
 	if is_instance_of(structure, AffectingStructure):
-		$RangeArea/CollisionShape2D.shape.radius = structure.affect_radius
-		$RangeArea.set_collision_mask_value(Constants.COLLISION_LAYER_CREEPS, true)
-		$RangeArea.area_entered.connect(on_creep_in_range)
-		$RangeArea.area_exited.connect(on_creep_out_of_range)
+		$AffectRangeArea/CollisionShape2D.shape.radius = structure.affect_radius
+		$AffectRangeArea.area_entered.connect(on_creep_in_range)
+		$AffectRangeArea.area_exited.connect(on_creep_out_of_range)
 		
+		structure.creep_affected.connect(on_creep_affected)
 		$AffectTimer.wait_time = structure.affect_interval_ms / 1000.
 		$AffectTimer.start()
-		structure.creep_affected.connect(on_creep_affected)
-	elif is_instance_of(structure, GridNodeStructure):
-		$RangeArea/CollisionShape2D.shape.radius = structure.max_connection_length
-		$RangeArea.set_collision_mask_value(Constants.COLLISION_LAYER_STRUCTURES, true)
-		$RangeArea.area_entered.connect(on_structure_in_range)
-		$RangeArea.area_exited.connect(on_structure_out_of_range)
 
 
 func _draw():
@@ -68,7 +66,7 @@ func connect_to_structure_area_collisions(on_start: Callable, on_end: Callable):
 
 func on_structure_in_range(area: Area2D) -> void:
 	var drain_structure: Structure = area.get_structure()
-	if structure != drain_structure && structure.is_floating:
+	if structure != drain_structure && structure.is_floating && (structure is GridNodeStructure || drain_structure is GridNodeStructure):
 		game_controller.grid_connections.add_grid_connection_between(structure, drain_structure)
 
 

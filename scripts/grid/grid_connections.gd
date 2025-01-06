@@ -11,6 +11,7 @@ func add_grid_connection_between(structure1: Structure, structure2: Structure):
 
 
 func add_grid_connection(connection: GridConnection):
+	assert(connection.structure1 is GridNodeStructure || connection.structure2 is GridNodeStructure)
 	assert(!is_grid_connected(connection.structure1, connection.structure2))
 	connections.push_back(connection)
 	grid_connection_added.emit(connection)

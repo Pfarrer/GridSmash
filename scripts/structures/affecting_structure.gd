@@ -11,7 +11,7 @@ var affect_ready = false
 var creeps_in_range: Array = []
 
 func _init(pos: Vector2) -> void:
-	super(pos, 20)
+	super(pos, 20, 500)
 
 
 func set_creep_in_range(creep: Creep) -> void:

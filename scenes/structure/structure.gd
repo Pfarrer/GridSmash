@@ -68,11 +68,11 @@ func connect_to_structure_area_collisions(on_start: Callable, on_end: Callable):
 
 func on_structure_in_range(area: Area2D) -> void:
 	var drain_structure: Structure = area.get_structure()
-	if structure != drain_structure:
-		structure.add_grid_connection(drain_structure)
+	if structure != drain_structure && structure.is_floating:
+		game_controller.grid_connections.add_grid_connection_between(structure, drain_structure)
 
 
 func on_structure_out_of_range(area: Area2D) -> void:
 	var drain_structure: Structure = area.get_structure()
-	if structure != drain_structure:
-		structure.remove_grid_connection(drain_structure)
+	if structure != drain_structure && structure.is_floating:
+		game_controller.grid_connections.remove_grid_connection_between(structure, drain_structure)

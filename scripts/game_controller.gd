@@ -6,7 +6,6 @@ const INITIAL_INCOME = 100
 const INITIAL_CREDITS = 1000
 const CREEP_PRICE = 100
 const CREEP_INCOME_INCREASE = 10
-const STRUCTURE_PRICE = 500
 
 signal lives_changed(remaining_lives: int)
 signal round_changed(round_number: int)
@@ -26,6 +25,7 @@ var _income: int = INITIAL_INCOME
 var _credits: int = INITIAL_CREDITS
 var structures: Array = []
 var creeps: Array = []
+var grid_connections: GridConnections = GridConnections.new()
 
 func _init(game_clock: Signal):
 	game_clock.connect(_on_clock_tick)
@@ -58,10 +58,10 @@ func creep_passed():
 
 
 func build(structure: Structure) -> void:
-	if _credits >= STRUCTURE_PRICE:
+	if _credits >= structure.structure_price:
 		structure.is_floating = false
 
-		_credits -= STRUCTURE_PRICE
+		_credits -= structure.structure_price
 		credits_changed.emit(_credits)
 
 		structures.append(structure)
@@ -70,7 +70,7 @@ func build(structure: Structure) -> void:
 
 func after_game_initialized():
 	if enable_seed_game_state:
-		_credits += 2 * GameController.STRUCTURE_PRICE + GameController.CREEP_PRICE 
+		_credits += 2 * AffectingStructure.new(Vector2.ZERO).structure_price + GameController.CREEP_PRICE
 		build(AffectingStructure.new(Vector2(195, 132)))
 		build(AffectingStructure.new(Vector2(359, 122)))
 		

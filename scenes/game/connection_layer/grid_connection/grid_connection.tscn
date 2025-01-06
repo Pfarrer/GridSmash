@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dn2xp0l1m3d2a"]
 
-[ext_resource type="Script" path="res://scenes/structure/grid_connection/grid_connection.gd" id="1_ybsuw"]
+[ext_resource type="Script" path="res://scenes/game/connection_layer/grid_connection/grid_connection.gd" id="1_ybsuw"]
 
 [node name="GridConnection" type="Node2D"]
 script = ExtResource("1_ybsuw")

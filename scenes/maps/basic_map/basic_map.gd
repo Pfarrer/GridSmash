@@ -1,8 +1,5 @@
 extends Node2D
 
-var structure_scene = preload("res://scenes/structure/structure.tscn")
-var creep_scene = preload("res://scenes/creep/creep.tscn")
-
 var game_controller: GameController
 
 func _ready() -> void:
@@ -16,17 +13,17 @@ func _ready() -> void:
 
 
 func on_structure_placed(structure: Structure):
-	var structure_scene_instance = structure_scene.instantiate()
-	structure_scene_instance.game_controller = game_controller
-	structure_scene_instance.structure = structure
-	$Structures.add_child(structure_scene_instance)
+	var structure_scene = preload("res://scenes/structure/structure.tscn").instantiate()
+	structure_scene.game_controller = game_controller
+	structure_scene.structure = structure
+	$Structures.add_child(structure_scene)
 
 
 func on_creep_spawned(creep: Creep):
-	var creep_scence_instance = creep_scene.instantiate()
-	creep_scence_instance.game_controller = game_controller
-	creep_scence_instance.creep = creep
-	$CreepPath.add_child(creep_scence_instance)
+	var creep_scence = preload("res://scenes/creep/creep.tscn").instantiate()
+	creep_scence.game_controller = game_controller
+	creep_scence.creep = creep
+	$CreepPath.add_child(creep_scence)
 
 
 func add_path_collision_shapes(points: PackedVector2Array):

@@ -11,6 +11,10 @@ func _ready() -> void:
 	map.game_controller = game_controller
 	$MapContainer.add_child(map)
 	
+	var connection_layer = preload("res://scenes/game/connection_layer/ConnectionLayer.tscn").instantiate()
+	connection_layer.game_controller = game_controller
+	$MapContainer.add_child(connection_layer)
+	
 	var menu = preload("res://scenes/game/menu/menu.tscn").instantiate()
 	menu.game_controller = game_controller
 	menu.build_structure.connect(on_build_structure)

@@ -49,9 +49,11 @@ func send_creep() -> Creep:
 		return null
 
 
-func creep_passed():
-	_lives -= 1
-	lives_changed.emit(_lives)
+func creep_passed(creep: Creep):
+	if creep.health > 0:
+		_lives -= 1
+		lives_changed.emit(_lives)
+	creep.destroyed.emit(creep)
 	
 	if _lives == 0:
 		print("game over")
@@ -96,7 +98,5 @@ func _on_clock_tick() -> void:
 
 func _remove_creep(creep: Creep):
 	var idx = creeps.find(creep)
-	if idx == -1:
-		print("Supposed to remove creep from creeps list, but was not found.")
-	else:
+	if idx > -1:
 		creeps.remove_at(idx)

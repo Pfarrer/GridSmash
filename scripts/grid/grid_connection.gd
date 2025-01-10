@@ -4,10 +4,10 @@ extends RefCounted
 var structure1: Structure
 var structure2: Structure
 
-func _init(structure1: Structure, structure2: Structure):
-	assert(structure1 != structure2)
-	self.structure1 = structure1
-	self.structure2 = structure2
+func _init(_structure1: Structure, _structure2: Structure):
+	assert(_structure1 != _structure2)
+	self.structure1 = _structure1
+	self.structure2 = _structure2
 
 
 func connects_to(structure: Structure) -> bool:

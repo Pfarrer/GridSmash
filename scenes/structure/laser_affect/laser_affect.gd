@@ -10,7 +10,7 @@ func _ready() -> void:
 	assert(creep)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	self.modulate.a = timer.time_left / timer.wait_time
 
 

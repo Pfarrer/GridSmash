@@ -21,7 +21,6 @@ func on_structure_placed(structure: Structure):
 
 func on_creep_spawned(creep: Creep):
 	var creep_scence = preload("res://scenes/creep/creep.tscn").instantiate()
-	creep_scence.game_controller = game_controller
 	creep_scence.creep = creep
 	$CreepPath.add_child(creep_scence)
 
@@ -38,3 +37,8 @@ func add_path_collision_shapes(points: PackedVector2Array):
 		collision_shape.shape = shape
 		collision_shape.position = p1
 		$PathArea.add_child(collision_shape)
+
+
+func on_map_area_body_exited(body: Node2D) -> void:
+	var creep = body.get_creep()
+	game_controller.creep_passed(creep)

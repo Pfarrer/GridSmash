@@ -8,9 +8,9 @@ func before_each():
 
 
 func test_add_grid_connection():
-	var structure1 = autofree(Structure.new(Vector2(0, 0), 10, 100))
-	var structure2 = autofree(Structure.new(Vector2(0, 0), 10, 100))
-	var structure3 = autofree(Structure.new(Vector2(0, 0), 10, 100))
+	var structure1 = autofree(GridNodeStructure.new(Vector2.ZERO))
+	var structure2 = autofree(GridNodeStructure.new(Vector2.ZERO))
+	var structure3 = autofree(GridNodeStructure.new(Vector2.ZERO))
 	
 	# No connections yet
 	assert_eq(grid_connections.connections.size(), 0)
@@ -36,9 +36,9 @@ func test_add_grid_connection():
 
 
 func test_disconnect_grid_connections():
-	var structure1 = autofree(Structure.new(Vector2(0, 0), 10, 100))
-	var structure2 = autofree(Structure.new(Vector2(0, 0), 10, 100))
-	var structure3 = autofree(Structure.new(Vector2(0, 0), 10, 100))
+	var structure1 = autofree(GridNodeStructure.new(Vector2.ZERO))
+	var structure2 = autofree(GridNodeStructure.new(Vector2.ZERO))
+	var structure3 = autofree(GridNodeStructure.new(Vector2.ZERO))
 	
 	grid_connections.add_grid_connection_between(structure1, structure2)
 	grid_connections.add_grid_connection_between(structure2, structure3)

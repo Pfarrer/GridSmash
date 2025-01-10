@@ -15,6 +15,8 @@ func _init(pos: Vector2) -> void:
 
 
 func set_creep_in_range(creep: Creep) -> void:
+	print("set_creep_in_range -- self: ", self, ", creep: ", creep)
+	
 	if creeps_in_range.has(creep):
 		print_debug("Creep moved into range but was already in creeps_in_range list!", creep, self)
 	else:
@@ -23,6 +25,8 @@ func set_creep_in_range(creep: Creep) -> void:
 
 
 func set_creep_out_of_range(creep: Creep) -> void:
+	print("set_creep_out_of_range -- self: ", self, ", creep: ", creep)
+	
 	var idx = creeps_in_range.find(creep)
 	if idx == -1:
 		print_debug("Creep moved out of range but was not in creeps_in_range list!", creep, self)

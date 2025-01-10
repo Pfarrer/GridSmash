@@ -1,5 +1,6 @@
 class_name Creep
 
+# A creep is also destroyed when it passes through the entire map and steals a live from the player.
 signal destroyed(creep: Creep)
 
 var position = Vector2.ZERO

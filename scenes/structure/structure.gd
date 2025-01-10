@@ -16,8 +16,8 @@ func _ready() -> void:
 	
 	if is_instance_of(structure, AffectingStructure):
 		$AffectRangeArea/CollisionShape2D.shape.radius = structure.affect_radius
-		$AffectRangeArea.area_entered.connect(on_creep_in_range)
-		$AffectRangeArea.area_exited.connect(on_creep_out_of_range)
+		$AffectRangeArea.body_entered.connect(on_creep_in_range)
+		$AffectRangeArea.body_exited.connect(on_creep_out_of_range)
 		
 		structure.creep_affected.connect(on_creep_affected)
 		$AffectTimer.wait_time = structure.affect_interval_ms / 1000.
@@ -28,13 +28,13 @@ func _draw():
 	draw_circle(Vector2(0,0), structure.structure_radius, Color.GREEN, true, -1, true)
 
 
-func on_creep_in_range(area: Area2D) -> void:
-	var creep = area.get_creep()
+func on_creep_in_range(node: Node2D) -> void:
+	var creep = node.get_creep()
 	structure.set_creep_in_range(creep)
 
 
-func on_creep_out_of_range(area: Area2D) -> void:
-	var creep = area.get_creep()
+func on_creep_out_of_range(node: Node2D) -> void:
+	var creep = node.get_creep()
 	structure.set_creep_out_of_range(creep)
 
 

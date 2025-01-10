@@ -13,6 +13,7 @@ var structure_scene: Node
 
 func _ready() -> void:
 	assert(game_controller)
+	assert(structure_type)
 	
 	structure = structure_type.new(Vector2.ZERO)
 	structure.is_floating = true

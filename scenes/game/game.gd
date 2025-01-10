@@ -19,8 +19,6 @@ func _ready() -> void:
 	menu.game_controller = game_controller
 	menu.build_structure.connect(on_build_structure)
 	$MenuContainer.add_child(menu)
-	
-	game_controller.after_game_initialized()
 
 
 func on_build_structure(type: Variant):

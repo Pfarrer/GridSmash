@@ -12,3 +12,7 @@ func handle_affect(affect_damage: int):
 	if health <= 0:
 		health = 0
 		self.destroyed.emit(self)
+
+
+func _to_string() -> String:
+	return "Creep(%s, health=%s)" % [position, health]

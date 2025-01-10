@@ -59,4 +59,4 @@ func on_collision_end(_node: Node) -> void:
 func on_mouse_click():
 	if collisions == 0:
 		structure.position = position
-		game_controller.build(structure)
+		game_controller.build_structure(structure)

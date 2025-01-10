@@ -45,3 +45,7 @@ func trigger_affect_if_possible() -> void:
 		creep_affected.emit(target_creep)
 		target_creep.handle_affect(affect_damage)
 		affect_ready = false
+
+
+func _to_string() -> String:
+	return "AffectingStructure(%s, floating=%s)" % [position, is_floating]

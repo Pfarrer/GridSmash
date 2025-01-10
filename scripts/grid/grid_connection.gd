@@ -12,3 +12,7 @@ func _init(_structure1: Structure, _structure2: Structure):
 
 func connects_to(structure: Structure) -> bool:
 	return structure == structure1 || structure == structure2
+
+
+func _to_string():
+	return "GridConnection(%s, %s)" % [structure1, structure2]

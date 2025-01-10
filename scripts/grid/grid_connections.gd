@@ -12,9 +12,11 @@ func add_grid_connection_between(structure1: Structure, structure2: Structure):
 
 func add_grid_connection(connection: GridConnection):
 	assert(connection.structure1 is GridNodeStructure || connection.structure2 is GridNodeStructure)
-	assert(!is_grid_connected(connection.structure1, connection.structure2))
-	connections.push_back(connection)
-	grid_connection_added.emit(connection)
+	if !is_grid_connected(connection.structure1, connection.structure2):
+		connections.push_back(connection)
+		grid_connection_added.emit(connection)
+		
+		print("add_grid_connection -- connection: ", connection)
 
 
 func remove_grid_connection_between(structure1: Structure, structure2: Structure):
@@ -23,6 +25,8 @@ func remove_grid_connection_between(structure1: Structure, structure2: Structure
 		if connection.connects_to(structure1) && connection.connects_to(structure2):
 			connections.remove_at(i)
 			grid_connection_removed.emit(connection)
+			
+			print("remove_grid_connection_between -- structure1: ", structure1, ", structure2: ", structure2)
 			return
 
 

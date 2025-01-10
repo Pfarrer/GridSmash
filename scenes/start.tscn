@@ -37,11 +37,6 @@ selected = 0
 item_count = 1
 popup/item_0/text = "Basic Map"
 
-[node name="DevStateControl" type="CheckButton" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-button_pressed = true
-text = "Init Dev State"
-
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start Single Player Game"

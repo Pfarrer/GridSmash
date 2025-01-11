@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcvog553nx4nu"]
+[gd_scene load_steps=9 format=3 uid="uid://bcvog553nx4nu"]
 
 [ext_resource type="Script" path="res://scenes/structure/structure.gd" id="1_16sxx"]
 [ext_resource type="Script" path="res://scenes/structure/structure_area.gd" id="2_4brl8"]
 [ext_resource type="Script" path="res://scenes/structure/range_circle.gd" id="2_rl8pn"]
+[ext_resource type="Script" path="res://scenes/structure/charge_indication_bar.gd" id="4_6r0rl"]
+[ext_resource type="Texture2D" uid="uid://d0sjjs865je7f" path="res://assets/energy.svg" id="4_fri7x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ld8l"]
 resource_local_to_scene = true
@@ -10,6 +12,11 @@ radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_61fpf"]
 radius = 80.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_jgclo"]
+font_size = 140
+font_color = Color(0.92056, 0, 0.190986, 1)
+shadow_size = 0
 
 [node name="Structure" type="Node2D"]
 script = ExtResource("1_16sxx")
@@ -29,10 +36,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AffectRangeArea"]
 shape = SubResource("CircleShape2D_61fpf")
 
-[node name="RangeCircle" type="Node2D" parent="."]
-visible = false
-script = ExtResource("2_rl8pn")
-
 [node name="GridConnectionRangeArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
@@ -40,7 +43,43 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GridConnectionRangeArea"]
 shape = SubResource("CircleShape2D_61fpf")
 
+[node name="RangeCircle" type="Node2D" parent="."]
+visible = false
+script = ExtResource("2_rl8pn")
+
 [node name="AffectTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ChargeIndicationBar" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 24.0
+offset_bottom = 24.0
+scale = Vector2(0.8, 0.8)
+script = ExtResource("4_6r0rl")
+
+[node name="ProgressBar" type="ProgressBar" parent="ChargeIndicationBar"]
+layout_mode = 2
+offset_left = -40.0
+offset_right = 40.0
+offset_bottom = 27.0
+
+[node name="EnergySprite" type="Sprite2D" parent="ChargeIndicationBar"]
+position = Vector2(-32, 14)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_fri7x")
+
+[node name="NotConnectedSprite" type="Label" parent="ChargeIndicationBar"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = -2.5
+offset_right = 69.0
+offset_bottom = 189.5
+scale = Vector2(0.16, 0.16)
+tooltip_text = "This structure works only when connected to a grid."
+mouse_filter = 1
+text = "!"
+label_settings = SubResource("LabelSettings_jgclo")
 
 [connection signal="timeout" from="AffectTimer" to="." method="on_affect_timer_timeout"]

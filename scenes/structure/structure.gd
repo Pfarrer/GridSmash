@@ -23,6 +23,11 @@ func _ready() -> void:
 		$AffectTimer.wait_time = structure.affect_interval_ms / 1000.
 		$AffectTimer.start()
 
+		$ChargeIndicationBar.show()
+		update_grid_connection_status("")
+		game_controller.grid_connections.grid_connection_added.connect(update_grid_connection_status)
+		game_controller.grid_connections.grid_connection_removed.connect(update_grid_connection_status)
+
 
 func _draw():
 	draw_circle(Vector2(0,0), structure.structure_radius, Color.GREEN, true, -1, true)
@@ -74,3 +79,10 @@ func on_structure_out_of_range(area: Area2D) -> void:
 	var drain_structure: Structure = area.get_structure()
 	if structure != drain_structure && structure.is_floating:
 		game_controller.grid_connections.remove_grid_connection_between(structure, drain_structure)
+
+
+func update_grid_connection_status(_notused: Variant) -> void:
+	if game_controller.grid_connections.find_grid_connections(structure).is_empty():
+		$ChargeIndicationBar.show_grid_connection_warning()
+	else:
+		$ChargeIndicationBar.hide_grid_connection_warning()

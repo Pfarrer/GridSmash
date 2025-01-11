@@ -35,3 +35,11 @@ func is_grid_connected(structure1: Structure, structure2: Structure) -> bool:
 		if connection.connects_to(structure1) && connection.connects_to(structure2):
 			return true
 	return false
+
+
+func find_grid_connections(structure: Structure) -> Array:
+	var result = []
+	for connection in connections:
+		if connection.connects_to(structure):
+			result.push_back(connection)
+	return result

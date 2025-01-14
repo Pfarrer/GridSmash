@@ -25,10 +25,9 @@ func initialize_game():
 	game_controller.build_structure(t3)
 
 	var g1 = GridNodeStructure.new(Vector2(283, 196))
-	game_controller.build_structure(g1)
-
 	game_controller.grid_connections.add_grid_connection_between(t1, g1)
 	game_controller.grid_connections.add_grid_connection_between(t2, g1)
+	game_controller.build_structure(g1)
 	
 	game_controller.clock_ticked.connect(func (_t1: int):
 		game_controller.send_creep()

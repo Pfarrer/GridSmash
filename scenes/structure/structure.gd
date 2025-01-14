@@ -29,6 +29,10 @@ func _ready() -> void:
 		game_controller.grid_connections.grid_connection_removed.connect(update_grid_connection_status)
 
 
+func _process(_delta: float) -> void:
+	$ChargeIndicationBar.set_charge(structure.energy_charge, structure.energy_capacity)
+
+
 func _draw():
 	draw_circle(Vector2(0,0), structure.structure_radius, Color.GREEN, true, -1, true)
 

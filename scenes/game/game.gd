@@ -26,3 +26,7 @@ func on_build_structure(type: Variant):
 	build_layer.game_controller = game_controller
 	build_layer.structure_type = type
 	$MapContainer.add_child(build_layer)
+
+
+func _process(delta: float) -> void:
+	game_controller.energy_grids.update_energy_flows(delta)

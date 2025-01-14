@@ -62,6 +62,9 @@ text = "Credits"
 layout_mode = 2
 horizontal_alignment = 2
 
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
 [node name="EnergyGridsLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "Energy Grids"
@@ -79,9 +82,11 @@ text = "Send Creeps"
 
 [node name="CreepContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
+columns = 3
 
 [node name="Button" type="Button" parent="VBoxContainer/CreepContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Creep"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
@@ -93,17 +98,27 @@ text = "Build"
 
 [node name="TowerButtons" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
-columns = 5
+columns = 3
 script = ExtResource("2_psecc")
 
 [node name="GridNodeButton" type="Button" parent="VBoxContainer/TowerButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "GN"
+text = "Grid"
+
+[node name="GeneratorButton" type="Button" parent="VBoxContainer/TowerButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gen"
+
+[node name="BatteryButton" type="Button" parent="VBoxContainer/TowerButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bat"
 
 [node name="LaserTowerButton" type="Button" parent="VBoxContainer/TowerButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "LT"
+text = "Laser"
 
 [connection signal="pressed" from="VBoxContainer/CreepContainer/Button" to="." method="_on_creep_button_pressed"]

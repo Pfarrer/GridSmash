@@ -34,6 +34,11 @@ func grids() -> Array:
 	return _grids
 
 
+func update_energy_flows(delta: float) -> void:
+	for grid in _grids:
+		grid.energy_flow.update_flow(delta)
+
+
 func _grids_connected_to(connection: GridConnection) -> Array:
 	var results = []
 	for grid in _grids:

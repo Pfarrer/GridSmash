@@ -24,3 +24,7 @@ func sub(item: Variant):
 
 func has(item: Variant) -> bool:
 	return item in _dict
+
+
+func items() -> Array:
+	return _dict.keys()

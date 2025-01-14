@@ -1,15 +1,17 @@
 class_name EnergyGrid
 extends RefCounted
 
-signal energy_generation_changed(energy_generation: int)
-signal energy_consumption_changed(energy_generation: int)
-signal energy_stored_changed(energy_stored: int)
+signal energy_generation_max_changed(energy_generation: int)
+signal energy_consumption_max_changed(energy_generation: int)
+signal energy_capacity_max_changed(energy_stored: int)
+
+var energy_flow = EnergyFlow.new(self)
 
 var _connections: Array = []
 var _structures_set = CountingSet.new()
-var _energy_generation: int = 0
-var _energy_consumption: int = 0
-var _energy_stored: int = 0
+var _energy_generation_max: int = 0
+var _energy_consumption_max: int = 0
+var _energy_capacity_max: int = 0
 
 func is_structure_connected_to_grid(structure: Structure) -> bool:
 	for connection in _connections:
@@ -24,18 +26,25 @@ func add_grid_connection(connection: GridConnection) -> void:
 	
 	_connections.push_back(connection)
 
-	var previous_energy_generation = _energy_generation
-	var previous_energy_consumption = _energy_consumption
+	var previous_generation = _energy_generation_max
+	var previous_consumption = _energy_consumption_max
+	var previous_capacity = _energy_capacity_max
 	
 	if _structures_set.add(connection.structure1) == 1:
-		_energy_generation += connection.structure1.energy_generation
+		_energy_generation_max += connection.structure1.energy_generation
+		_energy_consumption_max += connection.structure1.energy_consumption
+		_energy_capacity_max += connection.structure1.energy_capacity
 	if _structures_set.add(connection.structure2) == 1:
-		_energy_generation += connection.structure2.energy_generation
+		_energy_generation_max += connection.structure2.energy_generation
+		_energy_consumption_max += connection.structure2.energy_consumption
+		_energy_capacity_max += connection.structure2.energy_capacity
 	
-	if _energy_generation != previous_energy_generation:
-		energy_generation_changed.emit(_energy_generation)
-	if _energy_consumption != previous_energy_consumption:
-		energy_consumption_changed.emit(_energy_consumption)
+	if _energy_generation_max != previous_generation:
+		energy_generation_max_changed.emit(_energy_generation_max)
+	if _energy_consumption_max != previous_consumption:
+		energy_consumption_max_changed.emit(_energy_consumption_max)
+	if _energy_capacity_max != previous_capacity:
+		energy_capacity_max_changed.emit(_energy_capacity_max)
 
 
 func remove_grid_connection(connection: GridConnection) -> void:
@@ -43,18 +52,25 @@ func remove_grid_connection(connection: GridConnection) -> void:
 	if idx != -1:
 		_connections.remove_at(idx)
 		
-		var previous_energy_generation = _energy_generation
-		var previous_energy_consumption = _energy_consumption
-		
+		var previous_generation = _energy_generation_max
+		var previous_consumption = _energy_consumption_max
+		var previous_capacity = _energy_capacity_max
+
 		if _structures_set.sub(connection.structure1) == 0:
-			_energy_generation -= connection.structure1.energy_generation
+			_energy_generation_max -= connection.structure1.energy_generation
+			_energy_consumption_max -= connection.structure1.energy_consumption
+			_energy_capacity_max -= connection.structure1.energy_capacity
 		if _structures_set.sub(connection.structure2) == 0:
-			_energy_generation -= connection.structure2.energy_generation
+			_energy_generation_max -= connection.structure2.energy_generation
+			_energy_consumption_max -= connection.structure2.energy_consumption
+			_energy_capacity_max -= connection.structure2.energy_capacity
 		
-		if _energy_generation != previous_energy_generation:
-			energy_generation_changed.emit(_energy_generation)
-		if _energy_consumption != previous_energy_consumption:
-			energy_consumption_changed.emit(_energy_consumption)
+		if _energy_generation_max != previous_generation:
+			energy_generation_max_changed.emit(_energy_generation_max)
+		if _energy_consumption_max != previous_consumption:
+			energy_consumption_max_changed.emit(_energy_consumption_max)
+		if _energy_capacity_max != previous_capacity:
+			energy_capacity_max_changed.emit(_energy_capacity_max)
 
 
 func merge_with_grid(other: EnergyGrid) -> void:
@@ -62,17 +78,21 @@ func merge_with_grid(other: EnergyGrid) -> void:
 		add_grid_connection(connection)
 
 
-func energy_generation() -> int:
-	return _energy_generation
+func energy_generation_max() -> int:
+	return _energy_generation_max
 
 
-func energy_consumption() -> int:
-	return _energy_consumption
+func energy_consumption_max() -> int:
+	return _energy_consumption_max
 
 
-func energy_stored() -> int:
-	return _energy_stored
+func energy_capacity_max() -> int:
+	return _energy_capacity_max
 
 
 func is_empty() -> bool:
 	return _connections.size() == 0
+
+
+func structures() -> Array:
+	return _structures_set.items()

@@ -4,6 +4,8 @@ extends GridContainer
 
 func _ready() -> void:
 	$GridNodeButton.connect("pressed", on_button_pressed.bind(GridNodeStructure))
+	$GeneratorButton.connect("pressed", on_button_pressed.bind(GeneratorStructure))
+	$BatteryButton.connect("pressed", on_button_pressed.bind(BatteryStructure))
 	$LaserTowerButton.connect("pressed", on_button_pressed.bind(AffectingStructure))
 
 

@@ -1,10 +1,9 @@
 class_name GridNodeStructure
 extends Structure
 
-var power_generation = 1000
-
 func _init(pos: Vector2) -> void:
 	super(pos, 10, 100)
+	energy_generation = 1
 
 
 func _to_string() -> String:

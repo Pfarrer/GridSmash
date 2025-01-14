@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://g43d3gg6mbsl"]
+
+[ext_resource type="Script" path="res://scenes/game/menu/grid_status/grid_status.gd" id="1_cqxil"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tayu2"]
+bg_color = Color(0.136826, 0.136826, 0.136826, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hef1p"]
+bg_color = Color(0, 0.605242, 0.0667878, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8r7el"]
+bg_color = Color(0.696505, 0.684601, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_grcp1"]
+bg_color = Color(0.379603, 0.583576, 1, 1)
+
+[node name="Panel" type="Panel"]
+custom_minimum_size = Vector2(48, 60)
+offset_right = 36.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_tayu2")
+script = ExtResource("1_cqxil")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(48, 60)
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 4.0
+size_flags_horizontal = 3
+
+[node name="GenerationBar" type="ProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_hef1p")
+value = 80.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ConsumptionBar" type="ProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_8r7el")
+value = 32.0
+fill_mode = 3
+show_percentage = false
+
+[node name="StoredBar" type="ProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_grcp1")
+value = 100.0
+fill_mode = 3
+show_percentage = false

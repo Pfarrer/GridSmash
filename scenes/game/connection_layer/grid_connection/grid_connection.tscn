@@ -7,4 +7,5 @@ script = ExtResource("1_ybsuw")
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0
-default_color = Color(1, 1, 0, 1)
+default_color = Color(1, 1, 0, 0.501961)
+texture_mode = 1

@@ -20,9 +20,11 @@ var _round_number: int = 1
 var _time_remaining_in_current_round: int = SECONDS_PER_ROUND
 var _income: int = INITIAL_INCOME
 var _credits: int = INITIAL_CREDITS
+
 var structures: Array = []
 var creeps: Array = []
 var grid_connections: GridConnections = GridConnections.new()
+var energy_grids = EnergyGrids.new()
 
 func _init(game_clock: Signal):
 	game_clock.connect(_on_clock_tick)
@@ -67,6 +69,9 @@ func build_structure(structure: Structure) -> void:
 
 		structures.append(structure)
 		structure_placed.emit(structure)
+
+		for connection in grid_connections.find_grid_connections(structure):
+			energy_grids.on_grid_connection_added(connection)
 		
 		print("build_structure -- structure: ", structure)
 

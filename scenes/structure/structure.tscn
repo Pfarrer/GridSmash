@@ -23,7 +23,7 @@ script = ExtResource("1_16sxx")
 
 [node name="StructureArea" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 5
+collision_mask = 21
 script = ExtResource("2_4brl8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StructureArea"]

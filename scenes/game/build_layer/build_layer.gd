@@ -7,6 +7,7 @@ const COLOR_AREA_LINE = Color.GRAY
 var game_controller: GameController
 var structure_type: Variant
 
+var is_within_map_area = false
 var collisions = 0
 var structure: Structure
 var structure_scene: Node
@@ -39,24 +40,30 @@ func _process(_delta: float):
 
 
 func _draw():
-	if collisions > 0:
+	if is_within_map_area && collisions == 0:
+		structure_scene.show()
+	else:
 		draw_circle(Vector2(0,0), structure.structure_radius, COLOR_COLLISION, true, -1, true)
 		structure_scene.hide()
+
+
+func on_collision_start(node: Node) -> void:
+	if node.name == "MapArea":
+		is_within_map_area = true
 	else:
-		structure_scene.show()
-
-
-func on_collision_start(_node: Node) -> void:
-	collisions += 1
+		collisions += 1
 	queue_redraw()
 
 
-func on_collision_end(_node: Node) -> void:
-	collisions -= 1
+func on_collision_end(node: Node) -> void:
+	if node.name == "MapArea":
+		is_within_map_area = false
+	else:
+		collisions -= 1
 	queue_redraw()
 
 
 func on_mouse_click():
-	if collisions == 0:
+	if is_within_map_area && collisions == 0:
 		structure.position = position
 		game_controller.build_structure(structure)

@@ -19,7 +19,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_set_generation_bar_value(energy_grid.energy_flow.current_energy_flow)
 	_set_consumption_bar_value(energy_grid.energy_flow.current_energy_flow)
-	_set_capacity_bar_value(0)
+	_set_capacity_bar_value(energy_grid.energy_flow.current_energy_charge)
 
 
 func _set_generation_bar_max_value(max_value: int) -> void:

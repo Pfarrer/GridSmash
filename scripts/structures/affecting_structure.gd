@@ -4,17 +4,15 @@ extends Structure
 signal creep_affected(creep: Creep)
 
 var affect_radius = 80
-var affect_interval_ms = 500
 var affect_damage = 20
 var affect_energy_use = 10
 
-var affect_interval_ready = false
 var creeps_in_range: Array = []
 
 func _init(pos: Vector2) -> void:
 	super(pos, 20, 500)
-	energy_capacity = 50
-	energy_consumption = 20
+	energy_consumption = affect_energy_use
+	energy_capacity = affect_energy_use
 
 
 func set_creep_in_range(creep: Creep) -> void:
@@ -37,22 +35,16 @@ func set_creep_out_of_range(creep: Creep) -> void:
 		creeps_in_range.remove_at(idx)
 
 
-func set_affect_ready() -> void:
-	affect_interval_ready = true
-	trigger_affect_if_possible()
-
-
 func add_energy_charge(charge: float) -> void:
 	super.add_energy_charge(charge)
 	trigger_affect_if_possible()
 
 
 func trigger_affect_if_possible() -> void:
-	if !is_floating && affect_interval_ready && energy_charge >= affect_energy_use && !creeps_in_range.is_empty():
+	if !is_floating && energy_charge >= affect_energy_use && !creeps_in_range.is_empty():
 		var target_creep = creeps_in_range.front()
 		creep_affected.emit(target_creep)
 		target_creep.handle_affect(affect_damage)
-		affect_interval_ready = false
 		energy_charge -= affect_energy_use
 
 

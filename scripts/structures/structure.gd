@@ -7,6 +7,7 @@ var structure_radius
 var structure_price
 var max_grid_connection_length = 100
 
+var energy_priority = 2
 var energy_generation = 0
 var energy_consumption = 0
 var energy_capacity = 0

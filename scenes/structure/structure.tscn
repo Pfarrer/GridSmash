@@ -47,9 +47,6 @@ shape = SubResource("CircleShape2D_61fpf")
 visible = false
 script = ExtResource("2_rl8pn")
 
-[node name="AffectTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="ChargeIndicationBar" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -81,5 +78,3 @@ tooltip_text = "This structure works only when connected to a grid."
 mouse_filter = 1
 text = "!"
 label_settings = SubResource("LabelSettings_jgclo")
-
-[connection signal="timeout" from="AffectTimer" to="." method="on_affect_timer_timeout"]

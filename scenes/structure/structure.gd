@@ -20,9 +20,8 @@ func _ready() -> void:
 		$AffectRangeArea.body_exited.connect(on_creep_out_of_range)
 		
 		structure.creep_affected.connect(on_creep_affected)
-		$AffectTimer.wait_time = structure.affect_interval_ms / 1000.
-		$AffectTimer.start()
 
+	if structure.energy_capacity > 0:
 		$ChargeIndicationBar.show()
 		update_grid_connection_status("")
 		game_controller.grid_connections.grid_connection_added.connect(update_grid_connection_status)
@@ -47,17 +46,11 @@ func on_creep_out_of_range(node: Node2D) -> void:
 	structure.set_creep_out_of_range(creep)
 
 
-func on_affect_timer_timeout() -> void:
-	structure.set_affect_ready()
-
-
 func on_creep_affected(creep: Creep):
 	var laser_affect = preload("res://scenes/structure/laser_affect/laser_affect.tscn").instantiate()
 	laser_affect.structure = structure
 	laser_affect.creep = creep
 	add_child(laser_affect)
-
-	$AffectTimer.start()
 
 
 func show_range() -> void:

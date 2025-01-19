@@ -8,6 +8,7 @@ func _ready() -> void:
 	assert(structure)
 	
 	position = structure.position
+	_set_structure_specific_asset()
 	$StructureArea/CollisionShape2D.shape.radius = structure.structure_radius
 	
 	$GridConnectionRangeArea/CollisionShape2D.shape.radius = structure.max_grid_connection_length
@@ -33,7 +34,18 @@ func _process(_delta: float) -> void:
 
 
 func _draw():
-	draw_circle(Vector2(0,0), structure.structure_radius, Color.GREEN, true, -1, true)
+	draw_circle(Vector2(0, 0), structure.structure_radius, Color.WHITE, true, -1, true)
+
+
+func _set_structure_specific_asset():
+	if structure is GridNodeStructure:
+		$Sprites/GridNodeSprite.show()
+	elif structure is GeneratorStructure:
+		$Sprites/GeneratorSprite.show()
+	elif structure is BatteryStructure:
+		$Sprites/BatterySprite.show()
+	elif structure is AffectingStructure:
+		$Sprites/LaserSprite.show()
 
 
 func on_creep_in_range(node: Node2D) -> void:

@@ -9,8 +9,8 @@ func _ready() -> void:
 
 
 func _process(delta: float):
-	self.progress += 100 * delta
-	creep.position = self.position
+	progress += creep.speed * delta
+	creep.position = position
 
 
 func on_destroyed(_creep: Creep):

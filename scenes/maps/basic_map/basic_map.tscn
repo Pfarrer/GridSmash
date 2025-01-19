@@ -27,7 +27,7 @@ collision_mask = 0
 
 [node name="MapArea" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 4
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapArea"]
 position = Vector2(356.5, 323)

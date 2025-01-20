@@ -25,20 +25,56 @@ offset_bottom = 648.0
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="GridSmashLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "GridSmash"
 label_settings = SubResource("LabelSettings_a2n4h")
 horizontal_alignment = 1
 
-[node name="MapControl" type="OptionButton" parent="CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SinglePlayerContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
+layout_mode = 2
+text = "Single Player"
+
+[node name="MapControl" type="OptionButton" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Basic Map"
+popup/item_1/text = "Spiral Map"
+popup/item_1/id = 1
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
+layout_mode = 2
+text = "Play now"
+
+[node name="MultiPlayerContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer"]
+layout_mode = 2
+text = "Multi Player"
+
+[node name="MapControl" type="OptionButton" parent="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer"]
 layout_mode = 2
 selected = 0
 item_count = 1
 popup/item_0/text = "Basic Map"
 
-[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer"]
 layout_mode = 2
-text = "Start Single Player Game"
+text = "Host Game"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_start_button_pressed"]
+[node name="Button2" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer"]
+layout_mode = 2
+text = "Join Game"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer/Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer/Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer/Button2" to="." method="_on_start_button_pressed"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://ce5leu0mpll6k"]
+
+[ext_resource type="Script" path="res://scenes/maps/spiral_map/spiral_map.gd" id="1_s32dj"]
+
+[sub_resource type="Curve2D" id="Curve2D_2qk07"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -64, 320, 0, 0, 0, 0, 448, 320, 0, 0, 0, 0, 448, 416, 0, 0, 0, 0, 352, 416, 0, 0, 0, 0, 352, 224, 0, 0, 0, 0, 544, 224, 0, 0, 0, 0, 544, 512, 0, 0, 0, 0, 256, 512, 0, 0, 0, 0, 256, 128, 0, 0, 0, 0, 640, 128, 0, 0, 0, 0, 640, 608, 0, 0, 0, 0, 160, 608, 0, 0, 0, 0, 160, -64)
+}
+point_count = 13
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f336b"]
+size = Vector2(711, 650)
+
+[node name="SpiralMap" type="Node2D"]
+script = ExtResource("1_s32dj")
+
+[node name="CreepPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_2qk07")
+
+[node name="Line2d" type="Line2D" parent="CreepPath"]
+width = 24.0
+default_color = Color(0, 0, 0, 1)
+
+[node name="PathArea" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="MapArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapArea"]
+position = Vector2(357, 324)
+shape = SubResource("RectangleShape2D_f336b")
+
+[node name="Structures" type="CanvasGroup" parent="."]
+
+[connection signal="body_exited" from="MapArea" to="." method="on_map_area_body_exited"]

@@ -30,14 +30,13 @@ func add_grid_connection(connection: GridConnection) -> void:
 	var previous_consumption = _energy_consumption_max
 	var previous_capacity = _energy_capacity_max
 	
-	if _structures_set.add(connection.structure1) == 1:
-		_energy_generation_max += connection.structure1.energy_generation
-		_energy_consumption_max += connection.structure1.energy_consumption
-		_energy_capacity_max += connection.structure1.energy_capacity
-	if _structures_set.add(connection.structure2) == 1:
-		_energy_generation_max += connection.structure2.energy_generation
-		_energy_consumption_max += connection.structure2.energy_consumption
-		_energy_capacity_max += connection.structure2.energy_capacity
+	for s in [connection.structure1, connection.structure2]:
+		if _structures_set.add(s) == 1:
+			_energy_generation_max += s.energy_generation
+			if s is BatteryStructure:
+				_energy_capacity_max += s.energy_capacity
+			else:
+				_energy_consumption_max += s.energy_consumption
 	
 	if _energy_generation_max != previous_generation:
 		energy_generation_max_changed.emit(_energy_generation_max)
@@ -56,14 +55,13 @@ func remove_grid_connection(connection: GridConnection) -> void:
 		var previous_consumption = _energy_consumption_max
 		var previous_capacity = _energy_capacity_max
 
-		if _structures_set.sub(connection.structure1) == 0:
-			_energy_generation_max -= connection.structure1.energy_generation
-			_energy_consumption_max -= connection.structure1.energy_consumption
-			_energy_capacity_max -= connection.structure1.energy_capacity
-		if _structures_set.sub(connection.structure2) == 0:
-			_energy_generation_max -= connection.structure2.energy_generation
-			_energy_consumption_max -= connection.structure2.energy_consumption
-			_energy_capacity_max -= connection.structure2.energy_capacity
+		for s in [connection.structure1, connection.structure2]:
+			if _structures_set.sub(s) == 0:
+				_energy_generation_max -= s.energy_generation
+				if s is BatteryStructure:
+					_energy_capacity_max -= s.energy_capacity
+				else:
+					_energy_consumption_max -= s.energy_consumption
 		
 		if _energy_generation_max != previous_generation:
 			energy_generation_max_changed.emit(_energy_generation_max)

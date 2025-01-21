@@ -26,10 +26,6 @@ var creeps: Array = []
 var grid_connections: GridConnections = GridConnections.new()
 var energy_grids = EnergyGrids.new()
 
-func _init(game_clock: Signal):
-	game_clock.connect(_on_clock_tick)
-
-
 func send_creep() -> Creep:
 	if _credits >= CREEP_PRICE:
 		var creep = Creep.new()
@@ -76,7 +72,8 @@ func build_structure(structure: Structure) -> void:
 		print("build_structure -- structure: ", structure)
 
 
-func _on_clock_tick() -> void:
+# Must be called every second
+func on_clock_tick() -> void:
 	if _time_remaining_in_current_round == 1:
 		_round_number += 1
 		round_changed.emit(_round_number)

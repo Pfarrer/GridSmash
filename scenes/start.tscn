@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwy68w28i3dlx"]
 
-[ext_resource type="Script" path="res://scenes/start.gd" id="1_45hx8"]
+[ext_resource type="Script" path="res://scenes/single_player_container.gd" id="2_k42eg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a2n4h"]
 font_size = 34
@@ -15,7 +15,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_45hx8")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 0
@@ -37,6 +36,7 @@ theme_override_constants/separation = 16
 
 [node name="SinglePlayerContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+script = ExtResource("2_k42eg")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
 layout_mode = 2
@@ -49,6 +49,11 @@ item_count = 2
 popup/item_0/text = "Basic Map"
 popup/item_1/text = "Spiral Map"
 popup/item_1/id = 1
+
+[node name="TrainingModeToggle" type="CheckButton" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
+layout_mode = 2
+tooltip_text = "In Training mode, you can explore all on your own. No other players will challenge you. The creeps you send will walk through your own map."
+text = "Training"
 
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
 layout_mode = 2
@@ -75,6 +80,6 @@ text = "Host Game"
 layout_mode = 2
 text = "Join Game"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer/Button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer/Button" to="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer" method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer/Button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer/Button2" to="." method="_on_start_button_pressed"]

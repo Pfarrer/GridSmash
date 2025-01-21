@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_hq2px"]
 [ext_resource type="PackedScene" uid="uid://tjq46r7fuyam" path="res://scenes/maps/basic_map/basic_map.tscn" id="2_0u8gh"]
 
-[node name="HBoxContainer" type="HBoxContainer"]
+[node name="GameContainer" type="HBoxContainer"]
 offset_right = 1154.0
 offset_bottom = 648.0
 script = ExtResource("1_hq2px")
@@ -22,3 +22,5 @@ size_flags_horizontal = 8
 
 [node name="GameTimer" type="Timer" parent="."]
 autostart = true
+
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

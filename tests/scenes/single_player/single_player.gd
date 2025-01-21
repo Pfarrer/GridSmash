@@ -15,23 +15,23 @@ func _ready() -> void:
 func initialize_game():
 	game_controller._credits = 10000
 	
-	var t1 = AffectingStructure.new(Vector2(195, 132))
-	var t3 = AffectingStructure.new(Vector2(188, 526))
-	var t2 = AffectingStructure.new(Vector2(359, 122))
+	var t1 = AffectingStructure.new(Vector2(135, 132))
+	var t2 = AffectingStructure.new(Vector2(329, 122))
+	var t3 = AffectingStructure.new(Vector2(188, 456))
 	game_controller.build_structure(t1)
 	game_controller.build_structure(t2)
 	game_controller.build_structure(t3)
 
-	var g1 = GridNodeStructure.new(Vector2(283, 196))
-	var g2 = GridNodeStructure.new(Vector2(315, 281))
+	var g1 = GridNodeStructure.new(Vector2(243, 196))
+	var g2 = GridNodeStructure.new(Vector2(285, 281))
 	game_controller.grid_connections.add_grid_connection_between(t1, g1)
 	game_controller.grid_connections.add_grid_connection_between(t2, g1)
 	game_controller.grid_connections.add_grid_connection_between(g1, g2)
 	game_controller.build_structure(g1)
 	game_controller.build_structure(g2)
 
-	var p1 = GeneratorStructure.new(Vector2(340, 354))
-	var b1 = BatteryStructure.new(Vector2(270, 356))
+	var p1 = GeneratorStructure.new(Vector2(310, 354))
+	var b1 = BatteryStructure.new(Vector2(240, 356))
 	game_controller.grid_connections.add_grid_connection_between(p1, g2)
 	game_controller.grid_connections.add_grid_connection_between(b1, g2)
 	game_controller.build_structure(p1)

@@ -5,12 +5,12 @@
 [sub_resource type="Curve2D" id="Curve2D_cr0dw"]
 bake_interval = 30.0
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -48, 160, -126, 19, 126, -19, 96, 56, -29, 174, 29, -174, 432, 160, -15, -201, 15, 201, 224, 216, 10, -94, -10, 94, 120, 528, -46, 44, 46, -44, 304, 576, -29, 38, 29, -38, 409, 368, -91, -35, 91, 35, 576, 296, 48, -50, -48, 50, 594, 528, 33, -66, -33, 66, 440, 576, 0, 0, 0, 0, 444, 718)
+"points": PackedVector2Array(0, 0, 0, 0, -43, 111, -126, 19, 126, -19, 96, 56, -134.946, 25.6751, 134.946, -25.6751, 363, 216, 102.768, -7.41624, -102.768, 7.41624, 349, 47, 34.7948, -92.9343, -34.7948, 92.9343, 143, 247, -50.3894, -77.0486, 50.3894, 77.0486, 129, 452, -46, 44, 46, -44, 341, 527, -29, 38, 29, -38, 395, 347, -91, -35, 91, 35, 571, 310, 48, -50, -48, 50, 586, 515, 33, -66, -33, 66, 418, 588, 0, 0, 0, 0, 444, 718)
 }
-point_count = 11
+point_count = 12
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f336b"]
-size = Vector2(711, 650)
+size = Vector2(660, 660)
 
 [node name="BasicMap" type="Node2D"]
 script = ExtResource("1_d67lw")
@@ -30,7 +30,7 @@ collision_layer = 16
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapArea"]
-position = Vector2(356.5, 323)
+position = Vector2(329, 328)
 shape = SubResource("RectangleShape2D_f336b")
 
 [node name="Structures" type="CanvasGroup" parent="."]

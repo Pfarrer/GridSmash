@@ -1,10 +1,9 @@
 extends GutTest
 
-signal game_clock()
 var game_controller: GameController
 
 func before_each():
-	game_controller = autofree(GameController.new(game_clock))
+	game_controller = autofree(GameController.new())
 	watch_signals(game_controller)
 
 

@@ -35,7 +35,9 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="SinglePlayerContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
+theme_override_constants/separation = 12
 script = ExtResource("2_k42eg")
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
@@ -50,16 +52,18 @@ popup/item_0/text = "Basic Map"
 popup/item_1/text = "Spiral Map"
 popup/item_1/id = 1
 
-[node name="TrainingModeToggle" type="CheckButton" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
+[node name="FellowPlayerSlider" type="HSlider" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
 layout_mode = 2
-tooltip_text = "In Training mode, you can explore all on your own. No other players will challenge you. The creeps you send will walk through your own map."
-text = "Training"
+max_value = 4.0
+tick_count = 5
+ticks_on_borders = true
 
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/SinglePlayerContainer"]
 layout_mode = 2
 text = "Play now"
 
 [node name="MultiPlayerContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer"]

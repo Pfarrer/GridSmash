@@ -6,7 +6,7 @@ var game_controller: GameController
 
 func _ready() -> void:
 	var game = game_scene.instantiate()
-	game_controller = GameController.new(game.find_child("GameTimer").timeout)
+	game_controller = GameController.new()
 	game.game_controller = game_controller
 	add_child(game)
 	initialize_game()
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func initialize_game():
 	game_controller._credits = 10000
-	
+
 	var t1 = AffectingStructure.new(Vector2(135, 132))
 	var t2 = AffectingStructure.new(Vector2(329, 122))
 	var t3 = AffectingStructure.new(Vector2(188, 456))

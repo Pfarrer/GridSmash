@@ -21,10 +21,11 @@ var _time_remaining_in_current_round: int = SECONDS_PER_ROUND
 var _income: int = INITIAL_INCOME
 var _credits: int = INITIAL_CREDITS
 
-var structures: Array = []
-var creeps: Array = []
+var structures: Array[Structure] = []
+var creeps: Array[Creep] = []
 var grid_connections: GridConnections = GridConnections.new()
 var energy_grids = EnergyGrids.new()
+var fellow_players = []
 
 func send_creep() -> Creep:
 	if _credits >= CREEP_PRICE:
@@ -86,6 +87,14 @@ func on_clock_tick() -> void:
 		_time_remaining_in_current_round -= 1
 	
 	clock_ticked.emit(_time_remaining_in_current_round)
+
+	for fellow_player in fellow_players:
+		fellow_player.on_clock_tick()
+
+
+func add_fellow_player(player: FellowPlayer) -> void:
+	print("add_fellow_player -- player: ", player)
+	fellow_players.push_back(player)
 
 
 func _remove_creep(creep: Creep):

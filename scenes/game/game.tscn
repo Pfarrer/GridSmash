@@ -4,19 +4,24 @@
 [ext_resource type="PackedScene" uid="uid://tjq46r7fuyam" path="res://scenes/maps/basic_map/basic_map.tscn" id="2_0u8gh"]
 
 [node name="GameContainer" type="HBoxContainer"]
-offset_right = 1154.0
-offset_bottom = 648.0
+custom_minimum_size = Vector2(1550, 660)
+offset_right = 1628.0
+offset_bottom = 660.0
 script = ExtResource("1_hq2px")
 map_scene = ExtResource("2_0u8gh")
 
+[node name="FellowPlayerContainer" type="PanelContainer" parent="."]
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(660, 0)
+layout_mode = 2
+
 [node name="MapContainer" type="Control" parent="."]
 clip_contents = true
-custom_minimum_size = Vector2(800, 648)
+custom_minimum_size = Vector2(660, 0)
 layout_mode = 2
 
 [node name="MenuContainer" type="Control" parent="."]
-clip_contents = true
-custom_minimum_size = Vector2(300, 648)
 layout_mode = 2
 size_flags_horizontal = 8
 

@@ -35,15 +35,17 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(_delta: float):
-	position = get_viewport().get_mouse_position()
-	structure.position = position
+	structure_scene.position = get_local_mouse_position()
+	structure.position = structure_scene.position
+	if collisions > 0 || !is_within_map_area:
+		queue_redraw()
 
 
 func _draw():
 	if is_within_map_area && collisions == 0:
 		structure_scene.show()
 	else:
-		draw_circle(Vector2(0,0), structure.structure_radius, COLOR_COLLISION, true, -1, true)
+		draw_circle(structure.position, structure.structure_radius, COLOR_COLLISION, true, -1, true)
 		structure_scene.hide()
 
 
@@ -65,5 +67,4 @@ func on_collision_end(node: Node) -> void:
 
 func on_mouse_click():
 	if is_within_map_area && collisions == 0:
-		structure.position = position
 		game_controller.build_structure(structure)

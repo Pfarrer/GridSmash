@@ -10,8 +10,7 @@ offset_bottom = 660.0
 script = ExtResource("1_hq2px")
 map_scene = ExtResource("2_0u8gh")
 
-[node name="FellowPlayerContainer" type="PanelContainer" parent="."]
-visible = false
+[node name="FellowPlayerContainer" type="Control" parent="."]
 clip_contents = true
 custom_minimum_size = Vector2(660, 0)
 layout_mode = 2

@@ -11,6 +11,8 @@ func _ready() -> void:
 		var fellow_player_map = map_scene.instantiate()
 		fellow_player_map.game_controller = fellow_player
 		$FellowPlayerContainer.add_child(fellow_player_map)
+	if game_controller.fellow_players.is_empty():
+		$FellowPlayerContainer.hide()
 
 	var map = map_scene.instantiate()
 	map.game_controller = game_controller

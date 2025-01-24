@@ -2,5 +2,11 @@
 
 [ext_resource type="Script" path="res://tests/scenes/single_player/single_player.gd" id="1_4xeha"]
 
-[node name="SinglePlayer" type="Node2D"]
+[node name="SinglePlayer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 972.0
+offset_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_4xeha")

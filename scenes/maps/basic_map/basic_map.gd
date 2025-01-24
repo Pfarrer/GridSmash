@@ -10,6 +10,10 @@ func _ready() -> void:
 	
 	game_controller.structure_placed.connect(on_structure_placed)
 	game_controller.creep_spawned.connect(on_creep_spawned)
+	
+	if game_controller is FellowPlayer:
+		$PathArea.hide()
+		$MapArea.queue_free()
 
 
 func on_structure_placed(structure: Structure):
@@ -29,9 +33,11 @@ func add_path_collision_shapes(points: PackedVector2Array):
 	for i in range(0, points.size() - 1):
 		var p1 = points[i]
 		var p2 = points[i+1]
-		
-		var shape = RectangleShape2D.new()
-		shape.size = (p1 - p2).min(p2 - p1)
+		var radius = p1.distance_to(p2) / 2.0
+		var center = (p2 - p1) / 2.0
+
+		var shape = CircleShape2D.new()
+		shape.radius = radius
 		
 		var collision_shape = CollisionShape2D.new()
 		collision_shape.shape = shape

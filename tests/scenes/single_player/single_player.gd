@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 var game_scene = preload("res://scenes/game/game.tscn")
 

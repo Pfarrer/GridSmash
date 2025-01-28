@@ -6,7 +6,7 @@ func _on_start_button_pressed() -> void:
 	game_scene.game_controller = GameController.new()
 	
 	for i in range(0, $FellowPlayerSlider.value):
-		game_scene.game_controller.add_fellow_player(FellowPlayer.new())
+		game_scene.game_controller.add_fellow_player(FellowPlayer.new(game_scene.game_controller))
 	
 	var current_scene = get_tree().root.get_child(0)
 	get_tree().root.add_child(game_scene)

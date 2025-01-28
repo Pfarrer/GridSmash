@@ -5,7 +5,7 @@ signal creep_affected(creep: Creep)
 
 var affect_radius = 80
 var affect_damage = 20
-var affect_energy_use = 10
+var affect_energy_use = 5
 
 var creeps_in_range: Array = []
 

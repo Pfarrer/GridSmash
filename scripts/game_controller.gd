@@ -51,6 +51,10 @@ func receive_creep(creep: Creep):
 
 
 func creep_passed(creep: Creep):
+	if creeps.find(creep) == -1:
+		print("Creep passed but on other map")
+		return
+		
 	if creep.health > 0:
 		_lives -= 1
 		lives_changed.emit(_lives)

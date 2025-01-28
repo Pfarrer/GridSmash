@@ -10,6 +10,11 @@ map_scene = ExtResource("2_0u8gh")
 [node name="GameTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="MapLayer" type="CanvasLayer" parent="."]
+[node name="MapLayer" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 660.0
+offset_bottom = 660.0
 
 [connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]

@@ -5,7 +5,7 @@ signal destroyed(creep: Creep)
 
 var speed = 100
 var position = Vector2.ZERO
-var health = 100
+var health = 50
 
 func handle_affect(affect_damage: int):
 	health -= affect_damage

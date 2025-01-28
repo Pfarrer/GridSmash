@@ -31,7 +31,11 @@ func _set_consumption_bar_max_value(max_value: int) -> void:
 
 
 func _set_capacity_bar_max_value(max_value: int) -> void:
-	$HBoxContainer/CapacityBar.max_value = max_value
+	if max_value == 0:
+		# Set max_value to 1, to prevent the bar from being fully filled
+		$HBoxContainer/CapacityBar.max_value = 1
+	else:
+		$HBoxContainer/CapacityBar.max_value = max_value
 
 
 func _set_generation_bar_value(value: int) -> void:

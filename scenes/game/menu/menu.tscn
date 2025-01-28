@@ -6,7 +6,7 @@
 [node name="VBoxContainer" type="MarginContainer"]
 custom_minimum_size = Vector2(300, 0)
 offset_right = 300.0
-offset_bottom = 104.0
+offset_bottom = 357.0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6

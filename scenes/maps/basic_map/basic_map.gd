@@ -10,10 +10,6 @@ func _ready() -> void:
 	
 	game_controller.structure_placed.connect(on_structure_placed)
 	game_controller.creep_spawned.connect(on_creep_spawned)
-	
-	if game_controller is FellowPlayer:
-		$PathArea.hide()
-		$MapArea.queue_free()
 
 
 func on_structure_placed(structure: Structure):

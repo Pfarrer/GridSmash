@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ce5leu0mpll6k"]
+[gd_scene load_steps=5 format=3 uid="uid://ce5leu0mpll6k"]
 
 [ext_resource type="Script" path="res://scenes/maps/spiral_map/spiral_map.gd" id="1_s32dj"]
+[ext_resource type="Script" path="res://scenes/maps/spiral_map/map_area.gd" id="2_ew5xy"]
 
 [sub_resource type="Curve2D" id="Curve2D_2qk07"]
 _data = {
@@ -27,6 +28,7 @@ collision_mask = 0
 [node name="MapArea" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 6
+script = ExtResource("2_ew5xy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapArea"]
 position = Vector2(357, 324)

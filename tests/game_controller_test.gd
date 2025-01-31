@@ -8,7 +8,8 @@ func before_each():
 
 
 func test_creep_is_removed_after_destroyed():
-	var creep = game_controller.send_creep()
+	var creep = Creep.new()
+	game_controller.receive_creep(creep)
 	assert_eq(game_controller.creeps.size(), 1)
 
 	creep.handle_affect(creep.health)

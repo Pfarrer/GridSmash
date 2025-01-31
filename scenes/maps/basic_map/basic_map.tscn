@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://tjq46r7fuyam"]
+[gd_scene load_steps=5 format=3 uid="uid://tjq46r7fuyam"]
 
 [ext_resource type="Script" path="res://scenes/maps/basic_map/basic_map.gd" id="1_d67lw"]
+[ext_resource type="Script" path="res://scenes/maps/basic_map/map_area.gd" id="2_ukhvi"]
 
 [sub_resource type="Curve2D" id="Curve2D_cr0dw"]
 bake_interval = 30.0
@@ -28,6 +29,7 @@ collision_mask = 0
 [node name="MapArea" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 6
+script = ExtResource("2_ukhvi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapArea"]
 position = Vector2(329, 328)

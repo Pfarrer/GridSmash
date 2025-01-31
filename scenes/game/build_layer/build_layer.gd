@@ -50,7 +50,7 @@ func _draw():
 
 
 func on_collision_start(node: Node) -> void:
-	if node.name == "MapArea":
+	if node.name == "MapArea" && node.get_game_controller() == game_controller:
 		is_within_map_area = true
 	else:
 		collisions += 1
@@ -58,7 +58,7 @@ func on_collision_start(node: Node) -> void:
 
 
 func on_collision_end(node: Node) -> void:
-	if node.name == "MapArea":
+	if node.name == "MapArea" && node.get_game_controller() == game_controller:
 		is_within_map_area = false
 	else:
 		collisions -= 1

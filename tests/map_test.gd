@@ -17,8 +17,9 @@ func _before_each(map_scene: PackedScene) -> Node2D:
 func test_passing_creeps_are_detected(map_scene = use_parameters(map_params)):
 	var map = _before_each(map_scene)
 	
-	var creep = map.game_controller.send_creep()
+	var creep = Creep.new()
 	creep.speed *= 100
+	map.game_controller.receive_creep(creep)
 	await wait_seconds(0.5)
 
 	assert_called(map.game_controller, "creep_passed", [creep])

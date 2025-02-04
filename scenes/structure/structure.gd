@@ -15,12 +15,12 @@ func _ready() -> void:
 	$GridConnectionRangeArea.area_entered.connect(on_structure_in_range)
 	$GridConnectionRangeArea.area_exited.connect(on_structure_out_of_range)
 	
-	if is_instance_of(structure, AffectingStructure):
+	if structure is AffectingStructure:
 		$AffectRangeArea/CollisionShape2D.shape.radius = structure.affect_radius
 		$AffectRangeArea.body_entered.connect(on_creep_in_range)
 		$AffectRangeArea.body_exited.connect(on_creep_out_of_range)
 		
-		structure.creep_affected.connect(on_creep_affected)
+		structure.creeps_affected.connect(on_creeps_affected)
 
 	if structure.energy_capacity > 0:
 		$ChargeIndicationBar.show()
@@ -58,11 +58,19 @@ func on_creep_out_of_range(node: Node2D) -> void:
 	structure.set_creep_out_of_range(creep)
 
 
-func on_creep_affected(creep: Creep):
-	var laser_affect = preload("res://scenes/structure/laser_affect/laser_affect.tscn").instantiate()
-	laser_affect.structure = structure
-	laser_affect.creep = creep
-	add_child(laser_affect)
+func on_creeps_affected(creeps: Array):
+	var affect: Node = null
+	
+	if structure is LaserStructure:
+		affect = preload("res://scenes/structure/laser_affect/laser_affect.tscn").instantiate()
+		affect.creep = creeps[0]
+	elif structure is ShockwaveStructure:
+		affect = preload("res://scenes/structure/shockwave_affect/shockwave_affect.tscn").instantiate()
+	else:
+		print_debug("Unknown structure type: ", structure)
+
+	affect.structure = structure
+	add_child(affect)
 
 
 func show_range() -> void:

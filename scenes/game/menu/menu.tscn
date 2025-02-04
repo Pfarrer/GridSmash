@@ -114,9 +114,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Bat"
 
-[node name="LaserTowerButton" type="Button" parent="VBoxContainer/TowerButtons"]
+[node name="LaserButton" type="Button" parent="VBoxContainer/TowerButtons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Laser"
+
+[node name="ShockwaveButton" type="Button" parent="VBoxContainer/TowerButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shock"
 
 [connection signal="pressed" from="VBoxContainer/CreepContainer/Button" to="." method="_on_creep_button_pressed"]

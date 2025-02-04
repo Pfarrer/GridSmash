@@ -1,18 +1,22 @@
 class_name AffectingStructure
 extends Structure
 
-signal creep_affected(creep: Creep)
+signal creeps_affected(creeps: Array)
 
-var affect_radius = 80
-var affect_damage = 20
-var affect_energy_use = 5
+var affect_radius: int
+var affect_damage: int
+var affect_energy_use: int
 
 var creeps_in_range: Array = []
 
-func _init(pos: Vector2) -> void:
-	super(pos, 20, 500)
-	energy_consumption = affect_energy_use
-	energy_capacity = affect_energy_use
+func _init(pos: Vector2, radius: int, price: int, _affect_radius: int, _affect_damage: int, _affect_energy_use: int) -> void:
+	super(pos, radius, price)
+	energy_consumption = _affect_energy_use
+	energy_capacity = _affect_energy_use
+
+	affect_radius = _affect_radius
+	affect_damage = _affect_damage
+	affect_energy_use = _affect_energy_use
 
 
 func set_creep_in_range(creep: Creep) -> void:
@@ -42,10 +46,12 @@ func add_energy_charge(charge: float) -> void:
 
 func trigger_affect_if_possible() -> void:
 	if !is_floating && energy_charge >= affect_energy_use && !creeps_in_range.is_empty():
-		var target_creep = creeps_in_range.front()
-		creep_affected.emit(target_creep)
-		target_creep.handle_affect(affect_damage)
 		energy_charge -= affect_energy_use
+		_affect_creeps()
+
+
+func _affect_creeps() -> void:
+	print_debug("Method must be overwritten by concrete subclasses!")
 
 
 func _to_string() -> String:

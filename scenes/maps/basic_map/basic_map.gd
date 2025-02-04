@@ -37,7 +37,7 @@ func add_path_collision_shapes(points: PackedVector2Array):
 		
 		var collision_shape = CollisionShape2D.new()
 		collision_shape.shape = shape
-		collision_shape.position = p1
+		collision_shape.position = p1 + center
 		$PathArea.add_child(collision_shape)
 
 

@@ -6,7 +6,8 @@ func _ready() -> void:
 	$GridNodeButton.connect("pressed", on_button_pressed.bind(GridNodeStructure))
 	$GeneratorButton.connect("pressed", on_button_pressed.bind(GeneratorStructure))
 	$BatteryButton.connect("pressed", on_button_pressed.bind(BatteryStructure))
-	$LaserTowerButton.connect("pressed", on_button_pressed.bind(AffectingStructure))
+	$LaserButton.connect("pressed", on_button_pressed.bind(LaserStructure))
+	$ShockwaveButton.connect("pressed", on_button_pressed.bind(ShockwaveStructure))
 
 
 func on_button_pressed(structure_type: Variant):

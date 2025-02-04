@@ -23,6 +23,7 @@ font_color = Color(0.92056, 0, 0.190986, 1)
 shadow_size = 0
 
 [node name="Structure" type="Node2D"]
+z_index = 1
 script = ExtResource("1_16sxx")
 
 [node name="Sprites" type="Node2D" parent="."]

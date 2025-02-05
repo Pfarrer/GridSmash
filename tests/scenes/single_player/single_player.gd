@@ -16,7 +16,7 @@ func initialize_game():
 	game_controller._credits = 10000
 
 	var t1 = LaserStructure.new(Vector2(135, 132))
-	var t2 = LaserStructure.new(Vector2(329, 122))
+	var t2 = ShockwaveStructure.new(Vector2(256, 123))
 	var t3 = LaserStructure.new(Vector2(188, 456))
 	game_controller.build_structure(t1)
 	game_controller.build_structure(t2)

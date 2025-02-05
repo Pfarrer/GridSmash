@@ -41,6 +41,6 @@ func add_path_collision_shapes(points: PackedVector2Array):
 		$PathArea.add_child(collision_shape)
 
 
-func on_map_area_body_exited(body: Node2D) -> void:
-	var creep = body.get_creep()
+func on_map_area_area_exited(area: Area2D) -> void:
+	var creep = area.get_creep()
 	game_controller.creep_passed(creep)

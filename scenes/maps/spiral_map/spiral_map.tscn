@@ -36,4 +36,4 @@ shape = SubResource("RectangleShape2D_f336b")
 
 [node name="Structures" type="CanvasGroup" parent="."]
 
-[connection signal="body_exited" from="MapArea" to="." method="on_map_area_body_exited"]
+[connection signal="area_exited" from="MapArea" to="." method="on_map_area_area_exited"]

@@ -16,10 +16,10 @@ script = ExtResource("1_ogr07")
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_mxtet")
 
-[node name="CreepBody" type="CharacterBody2D" parent="."]
+[node name="CreepArea" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 0
+collision_mask = 32
 script = ExtResource("3_v8sc7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CreepBody"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CreepArea"]
 shape = SubResource("CircleShape2D_dc8mq")

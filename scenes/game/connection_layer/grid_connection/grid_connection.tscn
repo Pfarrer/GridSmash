@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn2xp0l1m3d2a"]
+[gd_scene load_steps=3 format=3 uid="uid://dn2xp0l1m3d2a"]
 
 [ext_resource type="Script" path="res://scenes/game/connection_layer/grid_connection/grid_connection.gd" id="1_ybsuw"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_28k7e"]
 
 [node name="GridConnection" type="Node2D"]
 script = ExtResource("1_ybsuw")
@@ -10,3 +12,11 @@ z_index = -1
 width = 4.0
 default_color = Color(1, 1, 0, 0.501961)
 texture_mode = 1
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_28k7e")
+debug_color = Color(0.91142, 0.155032, 0.62238, 0.42)

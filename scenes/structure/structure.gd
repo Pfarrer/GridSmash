@@ -17,8 +17,8 @@ func _ready() -> void:
 	
 	if structure is AffectingStructure:
 		$AffectRangeArea/CollisionShape2D.shape.radius = structure.affect_radius
-		$AffectRangeArea.body_entered.connect(on_creep_in_range)
-		$AffectRangeArea.body_exited.connect(on_creep_out_of_range)
+		$AffectRangeArea.area_entered.connect(on_creep_in_range)
+		$AffectRangeArea.area_exited.connect(on_creep_out_of_range)
 		
 		structure.creeps_affected.connect(on_creeps_affected)
 

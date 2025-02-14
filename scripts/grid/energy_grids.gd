@@ -24,10 +24,13 @@ func on_grid_connection_added(connection: GridConnection) -> void:
 func on_grid_connection_removed(connection: GridConnection) -> void:
 	for grid in _grids:
 		if grid.is_structure_connected_to_grid(connection.structure1) || grid.is_structure_connected_to_grid(connection.structure2):
-			grid.remove_grid_connection(connection)
-		if grid.is_empty():
-			_grids.erase(grid)
-			grid_removed.emit(grid)
+			var new_grid = grid.remove_grid_connection(connection)
+			if new_grid != null:
+				_grids.push_back(new_grid)
+				grid_added.emit(new_grid)
+			elif grid.is_empty():
+				_grids.erase(grid)
+				grid_removed.emit(grid)
 
 
 func grids() -> Array:

@@ -3,7 +3,7 @@ extends GutTest
 var creep: Creep
 
 func before_each():
-	creep = autofree(Creep.new())
+	creep = autofree(StrongCreep.new(GameController.new()))
 	watch_signals(creep)
 
 

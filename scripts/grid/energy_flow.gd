@@ -1,5 +1,12 @@
 class_name EnergyFlow
-extends RefCounted
+
+signal energy_generation_max_changed(energy_generation: int)
+signal energy_consumption_max_changed(energy_generation: int)
+signal energy_capacity_max_changed(energy_stored: int)
+
+var _energy_generation_max: int = 0
+var _energy_consumption_max: int = 0
+var _energy_capacity_max: int = 0
 
 var current_energy_flow = 0
 var current_energy_charge = 0
@@ -10,11 +17,47 @@ func _init(energy_grid: EnergyGrid):
 	self._energy_grid = energy_grid
 
 
+func on_structures_changed() -> void:
+	var updated_generation: int = 0
+	var updated_consumption: int = 0
+	var updated_capacity: int = 0
+
+	for structure in _energy_grid.structures():
+		updated_generation += structure.energy_generation
+		if structure is BatteryStructure:
+			updated_consumption += structure.energy_capacity
+		else:
+			updated_capacity += structure.energy_consumption
+	
+	if _energy_generation_max != updated_generation:
+		_energy_generation_max = updated_generation
+		energy_generation_max_changed.emit(_energy_generation_max)
+	if _energy_consumption_max != updated_consumption:
+		_energy_consumption_max = updated_consumption
+		energy_consumption_max_changed.emit(_energy_consumption_max)
+	if _energy_capacity_max != updated_capacity:
+		_energy_capacity_max = updated_capacity
+		energy_capacity_max_changed.emit(_energy_capacity_max)
+
+
+func energy_generation_max() -> int:
+	return _energy_generation_max
+
+
+func energy_consumption_max() -> int:
+	return _energy_consumption_max
+
+
+func energy_capacity_max() -> int:
+	return _energy_capacity_max
+
+
+
 func update_flow(delta: float) -> void:
 	current_energy_flow = 0
 	current_energy_charge = 0
 
-	var remaining_generation = _energy_grid._energy_generation_max
+	var remaining_generation = _energy_generation_max
 	current_energy_charge = _total_energy_charge()
 	var original_charge = current_energy_charge
 

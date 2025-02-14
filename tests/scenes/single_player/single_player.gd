@@ -38,5 +38,5 @@ func initialize_game():
 	game_controller.build_structure(b1)
 	
 	game_controller.clock_ticked.connect(func (_t1: int):
-		game_controller.send_creep()
+		game_controller.send_creep(CutterCreep)
 	, ConnectFlags.CONNECT_ONE_SHOT)

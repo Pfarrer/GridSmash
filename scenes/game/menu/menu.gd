@@ -49,10 +49,6 @@ func _on_credits_changed(new_credits: int):
 	credits_label.text = str(new_credits)
 
 
-func _on_creep_button_pressed() -> void:
-	game_controller.send_creep()
-
-
 func _on_energy_grid_added(energy_grid: EnergyGrid):
 	var grid_status = preload("res://scenes/game/menu/grid_status/grid_status.tscn").instantiate()
 	grid_status.game_controller = game_controller

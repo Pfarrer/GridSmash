@@ -27,13 +27,17 @@ var grid_connections: GridConnections = GridConnections.new()
 var energy_grids = EnergyGrids.new()
 var fellow_players = []
 
-func send_creep():
+
+func _init():
+	grid_connections.grid_connection_removed.connect(energy_grids.on_grid_connection_removed)
+
+func send_creep(creep_type: Variant):
 	if _credits >= CREEP_PRICE:
 		if fellow_players.is_empty():
-			self.receive_creep(Creep.new())
+			self.receive_creep(creep_type)
 		else:
 			for fellow_player in fellow_players:
-				fellow_player.receive_creep(Creep.new())
+				fellow_player.receive_creep(creep_type)
 		
 		_credits -= CREEP_PRICE
 		credits_changed.emit(_credits)
@@ -42,12 +46,14 @@ func send_creep():
 		income_changed.emit(_income)
 
 
-func receive_creep(creep: Creep):
+func receive_creep(creep_class: Variant) -> Creep:
+	var creep = creep_class.new(self)
 	creeps.append(creep)
 	creep.destroyed.connect(_remove_creep)
 	creep_spawned.emit(creep)
 
 	print("receive_creep -- creep: ", creep)
+	return creep
 
 
 func creep_passed(creep: Creep):

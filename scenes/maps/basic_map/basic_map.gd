@@ -42,5 +42,6 @@ func add_path_collision_shapes(points: PackedVector2Array):
 
 
 func on_map_area_area_exited(area: Area2D) -> void:
-	var creep = area.get_creep()
-	game_controller.creep_passed(creep)
+	if area is CreepArea:
+		var creep = area.get_creep()
+		game_controller.creep_passed(creep)

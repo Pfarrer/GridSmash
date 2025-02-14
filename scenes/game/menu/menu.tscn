@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckf6bg0ugqtid"]
+[gd_scene load_steps=4 format=3 uid="uid://ckf6bg0ugqtid"]
 
 [ext_resource type="Script" path="res://scenes/game/menu/menu.gd" id="1_2vyx5"]
+[ext_resource type="Script" path="res://scenes/game/menu/creep_container.gd" id="2_2qo0w"]
 [ext_resource type="Script" path="res://scenes/game/menu/tower_buttons.gd" id="2_psecc"]
 
 [node name="MarginContainer" type="MarginContainer"]
@@ -81,11 +82,17 @@ text = "Send Creeps"
 [node name="CreepContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
 columns = 3
+script = ExtResource("2_2qo0w")
 
-[node name="Button" type="Button" parent="VBoxContainer/CreepContainer"]
+[node name="StrongCreepButton" type="Button" parent="VBoxContainer/CreepContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Creep"
+text = "Strong"
+
+[node name="CutterCreepButton" type="Button" parent="VBoxContainer/CreepContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cutter"
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 layout_mode = 2
@@ -124,4 +131,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Shock"
 
-[connection signal="pressed" from="VBoxContainer/CreepContainer/Button" to="." method="_on_creep_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreepContainer/CutterCreepButton" to="." method="_on_creep_button_pressed"]

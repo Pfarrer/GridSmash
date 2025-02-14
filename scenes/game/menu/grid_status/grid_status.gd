@@ -7,13 +7,13 @@ func _ready() -> void:
 	assert(game_controller)
 	assert(energy_grid)
 	
-	energy_grid.energy_generation_max_changed.connect(_set_generation_bar_max_value)
-	energy_grid.energy_consumption_max_changed.connect(_set_consumption_bar_max_value)
-	energy_grid.energy_capacity_max_changed.connect(_set_capacity_bar_max_value)
+	energy_grid.energy_flow.energy_generation_max_changed.connect(_set_generation_bar_max_value)
+	energy_grid.energy_flow.energy_consumption_max_changed.connect(_set_consumption_bar_max_value)
+	energy_grid.energy_flow.energy_capacity_max_changed.connect(_set_capacity_bar_max_value)
 
-	_set_generation_bar_max_value(energy_grid.energy_generation_max())
-	_set_consumption_bar_max_value(energy_grid.energy_consumption_max())
-	_set_capacity_bar_max_value(energy_grid.energy_capacity_max())
+	_set_generation_bar_max_value(energy_grid.energy_flow.energy_generation_max())
+	_set_consumption_bar_max_value(energy_grid.energy_flow.energy_consumption_max())
+	_set_capacity_bar_max_value(energy_grid.energy_flow.energy_capacity_max())
 
 
 func _process(_delta: float) -> void:

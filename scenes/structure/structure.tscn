@@ -90,21 +90,23 @@ script = ExtResource("4_6r0rl")
 
 [node name="ProgressBar" type="ProgressBar" parent="ChargeIndicationBar"]
 layout_mode = 2
-offset_left = -40.0
-offset_right = 40.0
-offset_bottom = 27.0
+offset_left = -30.0
+offset_right = 30.0
+offset_bottom = 24.0
+step = 1.0
+show_percentage = false
 
 [node name="EnergySprite" type="Sprite2D" parent="ChargeIndicationBar"]
-position = Vector2(-32, 14)
+position = Vector2(-22.5, 11.75)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_fri7x")
 
 [node name="NotConnectedSprite" type="Label" parent="ChargeIndicationBar"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = -2.5
-offset_right = 69.0
-offset_bottom = 189.5
+offset_left = 21.25
+offset_top = -3.75
+offset_right = 60.25
+offset_bottom = 188.25
 scale = Vector2(0.16, 0.16)
 tooltip_text = "This structure works only when connected to a grid."
 mouse_filter = 1

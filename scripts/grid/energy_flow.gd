@@ -52,7 +52,6 @@ func energy_capacity_max() -> int:
 	return _energy_capacity_max
 
 
-
 func update_flow(delta: float) -> void:
 	current_energy_flow = 0
 	current_energy_charge = 0

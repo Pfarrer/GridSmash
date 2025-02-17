@@ -31,7 +31,7 @@ func add_path_collision_shapes(points: PackedVector2Array):
 		var p2 = points[i+1]
 		
 		var shape = RectangleShape2D.new()
-		shape.size = (p1 - p2).min(p2 - p1)
+		shape.size = (p1 - p2).max(p2 - p1)
 		
 		var collision_shape = CollisionShape2D.new()
 		collision_shape.shape = shape

@@ -24,7 +24,6 @@ width = 24.0
 default_color = Color(0, 0, 0, 1)
 
 [node name="PathArea" type="Area2D" parent="."]
-visible = false
 collision_mask = 0
 
 [node name="MapArea" type="Area2D" parent="."]

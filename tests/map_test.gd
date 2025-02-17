@@ -5,11 +5,9 @@ var map_params = [
 	preload("res://scenes/maps/spiral_map/spiral_map.tscn"),
 ]
 
-signal timer()
-
 func _before_each(map_scene: PackedScene) -> Node2D:
 	var map = partial_double(map_scene).instantiate()
-	map.game_controller = partial_double(GameController).new(timer)
+	map.game_controller = partial_double(GameController).new()
 	add_child_autofree(map)
 	return map
 

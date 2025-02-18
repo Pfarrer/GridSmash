@@ -14,15 +14,15 @@ func _ready() -> void:
 		layer.size = Vector2(660, 660)
 		layer.clip_contents = true
 		add_child(layer)
-		_create_map_for_game_controller(fellow_player_controller, layer, Vector2(0, 0))
+		_create_map_for_game_controller(fellow_player_controller, layer)
 		
-	_create_map_for_game_controller(game_controller, $MapLayer, Vector2(viewport_size.x - 960, 0))
-	$MapLayer.position = Vector2(viewport_size.x - 960, 0)
+	_create_map_for_game_controller(game_controller, $MapLayer)
+	$MapLayer.position = Vector2(game_controller.fellow_players.size() * 660, 0)
 
 	var menu = preload("res://scenes/game/menu/menu.tscn").instantiate()
 	menu.game_controller = game_controller
 	menu.build_structure.connect(on_build_structure)
-	menu.position = Vector2(viewport_size.x - 300, 0)
+	menu.position = Vector2((game_controller.fellow_players.size() + 1) * 660, 0)
 	add_child(menu)
 
 
@@ -51,13 +51,11 @@ func _resize_window() -> Vector2i:
 	return get_window().size
 
 
-func _create_map_for_game_controller(controller: GameController, layer: Node, target_position: Vector2):
+func _create_map_for_game_controller(controller: GameController, layer: Node):
 	var map = map_scene.instantiate()
 	map.game_controller = controller
-#	map.position = target_position
 	layer.add_child(map)
 
 	var connection_layer = preload("res://scenes/game/connection_layer/ConnectionLayer.tscn").instantiate()
 	connection_layer.game_controller = controller
-#	connection_layer.position = target_position
 	layer.add_child(connection_layer)

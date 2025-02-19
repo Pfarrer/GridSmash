@@ -7,7 +7,7 @@ var game_controller: GameController
 func _ready() -> void:
 	assert(game_controller)
 	
-	var viewport_size = _resize_window()
+	_resize_window()
 
 	for fellow_player_controller in game_controller.fellow_players:
 		var layer = Control.new()

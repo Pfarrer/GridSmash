@@ -27,9 +27,9 @@ var grid_connections: GridConnections = GridConnections.new()
 var energy_grids = EnergyGrids.new()
 var fellow_players = []
 
-
 func _init():
 	grid_connections.grid_connection_removed.connect(energy_grids.on_grid_connection_removed)
+
 
 func send_creep(creep_type: Variant):
 	if _credits >= CREEP_PRICE:
@@ -58,7 +58,6 @@ func receive_creep(creep_class: Variant) -> Creep:
 
 func creep_passed(creep: Creep):
 	if creeps.find(creep) == -1:
-		print("Creep passed but on other map")
 		return
 		
 	if creep.health > 0.0:

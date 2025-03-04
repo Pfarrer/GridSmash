@@ -23,7 +23,7 @@ func handle_affect(affect_damage: int):
 		self.destroyed.emit(self)
 
 
-func on_grid_connection_touch(connection: GridConnection):
+func on_grid_connection_touch(_connection: GridConnection):
 	pass
 
 

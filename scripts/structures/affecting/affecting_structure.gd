@@ -39,9 +39,10 @@ func set_creep_out_of_range(creep: Creep) -> void:
 		creeps_in_range.remove_at(idx)
 
 
-func add_energy_charge(charge: float) -> void:
-	super.add_energy_charge(charge)
+func add_energy_charge(charge: float) -> float:
+	var excess_energy = super.add_energy_charge(charge)
 	trigger_affect_if_possible()
+	return super.add_energy_charge(excess_energy)
 
 
 func trigger_affect_if_possible() -> void:

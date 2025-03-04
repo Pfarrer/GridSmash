@@ -12,7 +12,7 @@ func _ready() -> void:
 func on_grid_connection_added(connection: GridConnection):
 	var grid_connection = preload("res://scenes/game/connection_layer/grid_connection/grid_connection.tscn").instantiate()
 	grid_connection.connection = connection
-	add_child(grid_connection)
+	call_deferred("add_child", grid_connection)
 
 
 func on_grid_connection_removed(connection: GridConnection):

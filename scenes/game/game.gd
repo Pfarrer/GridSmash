@@ -33,7 +33,7 @@ func on_build_structure(type: Variant):
 	$MapLayer.add_child(build_layer)
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	game_controller.energy_grids.update_energy_flows(delta)
 
 

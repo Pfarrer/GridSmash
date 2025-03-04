@@ -69,9 +69,6 @@ func _reachable_structures_from(structure: Structure, visited: Array = []) -> Ar
 func _split_grid_if_needed(structure: Structure) -> EnergyGrid:
 	var reachable_structures_from_structure2 = _reachable_structures_from(structure)
 	if reachable_structures_from_structure2.size() != _structures_set.size():
-#		var reachable_structures_from_structure1 = _reachable_structures_from(connection.structure1)
-#		assert(reachable_structures_from_structure1.size() + reachable_structures_from_structure2.size() == _structures_set.size())
-
 		var new_grid = EnergyGrid.new()
 		for connection in _connections:
 			if reachable_structures_from_structure2.has(connection.structure1) && reachable_structures_from_structure2.has(connection.structure2):

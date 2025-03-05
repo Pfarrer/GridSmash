@@ -1,6 +1,6 @@
 extends Control
 
-func set_charge(value: int, capacity: int):
+func set_charge(value: float, capacity: float) -> void:
 	$ProgressBar.max_value = capacity
 	$ProgressBar.value = value
 

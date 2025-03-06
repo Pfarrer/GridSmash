@@ -61,6 +61,48 @@ func test_grid_node_only_energy_grid():
 	assert_signal_emit_count(energy_grid.energy_flow, "energy_generation_max_changed", 4.0)
 
 
+func test_grid_splits_correctly():
+	var a = GridNodeStructure.new(Vector2.ZERO)
+	var b = GridNodeStructure.new(Vector2.ZERO)
+	var c = GridNodeStructure.new(Vector2.ZERO)
+	var d = GridNodeStructure.new(Vector2.ZERO)
+	var e = GridNodeStructure.new(Vector2.ZERO)
+	var f = GridNodeStructure.new(Vector2.ZERO)
+
+	# Example grid
+	# A -- B -- D -- F
+	#  \  /
+	#   C -- E
+	var connection_ab = GridConnection.new(a, b)
+	energy_grid.add_grid_connection(connection_ab)
+	var connection_bc = GridConnection.new(b, c)
+	energy_grid.add_grid_connection(connection_bc)
+	var connection_bd = GridConnection.new(b, d)
+	energy_grid.add_grid_connection(connection_bd)
+	var connection_ac = GridConnection.new(a, c)
+	energy_grid.add_grid_connection(connection_ac)
+	var connection_ce = GridConnection.new(c, e)
+	energy_grid.add_grid_connection(connection_ce)
+	var connection_df = GridConnection.new(d, f)
+	energy_grid.add_grid_connection(connection_df)
+
+	# No new energy_grid after removing connection between B and C
+	assert_null(energy_grid.remove_grid_connection(connection_bc))
+	assert_eq(energy_grid.structures().size(), 6)
+
+	# New energy_grid after removing connection between B and D
+	var energy_grid2 = energy_grid.remove_grid_connection(connection_bd)
+	assert_not_null(energy_grid2)
+	assert_eq(energy_grid2.structures().size(), 2)
+	assert_has(energy_grid2.structures(), d)
+	assert_has(energy_grid2.structures(), f)
+	assert_eq(energy_grid.structures().size(), 4)
+	assert_has(energy_grid.structures(), a)
+	assert_has(energy_grid.structures(), b)
+	assert_has(energy_grid.structures(), c)
+	assert_has(energy_grid.structures(), e)
+
+
 func test_merge_with_grid():
 	var other_grid = autofree(EnergyGrid.new())
 	other_grid.add_grid_connection(GridConnection.new(grid_node_structure1, grid_node_structure2))

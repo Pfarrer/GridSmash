@@ -1,6 +1,8 @@
 class_name CutterCreep
 extends Creep
 
+const PRICE = 150
+
 func _init(game_controller: GameController):
 	super(game_controller, 100, 20)
 

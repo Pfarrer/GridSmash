@@ -1,8 +1,10 @@
 class_name GridNodeStructure
 extends Structure
 
+const PRICE = 50
+
 func _init(pos: Vector2) -> void:
-	super(pos, 10, 50)
+	super(pos, 10, PRICE)
 	energy_generation = 1
 
 

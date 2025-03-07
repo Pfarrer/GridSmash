@@ -4,8 +4,7 @@ const INITIAL_LIVES = 20
 const SECONDS_PER_ROUND = 15
 const INITIAL_INCOME = 100
 const INITIAL_CREDITS = 1000
-const CREEP_PRICE = 100
-const CREEP_INCOME_INCREASE = 10
+const CREEP_INCOME_INCREASE = .1
 
 signal lives_changed(remaining_lives: int)
 signal round_changed(round_number: int)
@@ -32,17 +31,17 @@ func _init():
 
 
 func send_creep(creep_type: Variant):
-	if _credits >= CREEP_PRICE:
+	if _credits >= creep_type.PRICE:
 		if fellow_players.is_empty():
 			self.receive_creep(creep_type)
 		else:
 			for fellow_player in fellow_players:
 				fellow_player.receive_creep(creep_type)
 		
-		_credits -= CREEP_PRICE
+		_credits -= creep_type.PRICE
 		credits_changed.emit(_credits)
 		
-		_income += CREEP_INCOME_INCREASE
+		_income += creep_type.PRICE * CREEP_INCOME_INCREASE
 		income_changed.emit(_income)
 
 

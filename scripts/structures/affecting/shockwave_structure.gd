@@ -1,8 +1,10 @@
 class_name ShockwaveStructure
 extends AffectingStructure
 
+const PRICE = 250
+
 func _init(pos: Vector2) -> void:
-	super(pos, 20, 250, 60, 5, 5)
+	super(pos, 20, PRICE, 60, 5, 5)
 
 
 func _affect_creeps() -> void:

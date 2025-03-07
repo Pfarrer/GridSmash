@@ -1,8 +1,10 @@
 class_name LaserStructure
 extends AffectingStructure
 
+const PRICE = 300
+
 func _init(pos: Vector2) -> void:
-	super(pos, 20, 300, 90, 20, 5)
+	super(pos, 20, PRICE, 90, 20, 5)
 
 
 func _affect_creeps() -> void:

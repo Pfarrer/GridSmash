@@ -12,16 +12,16 @@ func _init(parent_game_controller: GameController) -> void:
 
 
 func send_creep(creep_type: Variant):
-	if _credits >= CREEP_PRICE:
+	if _credits >= creep_type.PRICE:
 		_parent_game_controller.receive_creep(creep_type)
 		
-		_credits -= CREEP_PRICE
+		_credits -= creep_type.PRICE
 		credits_changed.emit(_credits)
 		
-		_income += CREEP_INCOME_INCREASE
+		_income += creep_type.PRICE * CREEP_INCOME_INCREASE
 		income_changed.emit(_income)
 
 
 func _on_clock_ticked(_remaining_time: int) -> void:
-	if _credits >= CREEP_PRICE:
+	if _credits >= CutterCreep.PRICE:
 		send_creep(CutterCreep)

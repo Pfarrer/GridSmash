@@ -1,5 +1,6 @@
 class_name Creep
 
+signal health_changed(health: float)
 # A creep is also destroyed when it passes through the entire map and steals a live from the player.
 signal destroyed(creep: Creep)
 
@@ -17,10 +18,11 @@ func _init(game_controller: GameController, _speed: float, _health: float):
 
 func handle_affect(affect_damage: int):
 	health -= affect_damage
-	
 	if health <= 0:
 		health = 0
 		self.destroyed.emit(self)
+	else:
+		self.health_changed.emit(health)
 
 
 func on_grid_connection_touch(_connection: GridConnection):

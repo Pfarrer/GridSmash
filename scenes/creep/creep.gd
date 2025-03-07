@@ -1,17 +1,18 @@
-class_name CreepNode
-extends PathFollow2D
+extends Node2D
 
 var creep: Creep
 
 func _ready() -> void:
 	assert(creep)
 	_set_creep_specific_asset()
+	$HealthBar.max_value = creep.health
 
+	creep.health_changed.connect(_on_health_changed)
 	creep.destroyed.connect(on_destroyed)
 
 
 func _process(delta: float):
-	progress += creep.speed * delta
+	self.progress += creep.speed * delta
 	creep.position = position
 
 
@@ -29,3 +30,8 @@ func _set_creep_specific_asset():
 		$Sprites/StrongCreepSprite.show()
 	elif creep is CutterCreep:
 		$Sprites/CutterCreepSprite.show()
+
+
+func _on_health_changed(health: float):
+	$HealthBar.value = health
+	$HealthBar.show()

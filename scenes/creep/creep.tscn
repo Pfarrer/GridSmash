@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7c6vyrwa2i73"]
+[gd_scene load_steps=7 format=3 uid="uid://b7c6vyrwa2i73"]
 
 [ext_resource type="Script" path="res://scenes/creep/creep.gd" id="1_ogr07"]
 [ext_resource type="Texture2D" uid="uid://cu81ejes3lxrv" path="res://assets/creeps/creep1.svg" id="2_mxtet"]
@@ -8,7 +8,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_dc8mq"]
 radius = 61.131
 
-[node name="Creep" type="PathFollow2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wodii"]
+bg_color = Color(0.788787, 0, 0.255847, 1)
+
+[node name="PathFollow" type="PathFollow2D"]
 scale = Vector2(0.25, 0.25)
 loop = false
 script = ExtResource("1_ogr07")
@@ -33,5 +36,14 @@ visible = false
 position = Vector2(-4, 4)
 scale = Vector2(1.3, 1.3)
 texture = ExtResource("4_7sqob")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -52.0
+offset_top = -68.0
+offset_right = 52.0
+offset_bottom = -60.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_wodii")
+show_percentage = false
 
 [connection signal="area_entered" from="CreepArea" to="." method="_on_creep_area_area_entered"]

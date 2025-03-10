@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ce5leu0mpll6k"]
 
-[ext_resource type="Script" path="res://scenes/maps/spiral_map/spiral_map.gd" id="1_s32dj"]
-[ext_resource type="Script" path="res://scenes/maps/spiral_map/map_area.gd" id="2_ew5xy"]
+[ext_resource type="Script" uid="uid://7q6tjj17alqu" path="res://scenes/maps/spiral_map/spiral_map.gd" id="1_s32dj"]
+[ext_resource type="Script" uid="uid://cqpinnq4jiney" path="res://scenes/maps/spiral_map/map_area.gd" id="2_ew5xy"]
 
 [sub_resource type="Curve2D" id="Curve2D_2qk07"]
 _data = {

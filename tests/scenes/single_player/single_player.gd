@@ -41,6 +41,3 @@ func initialize_game():
 	game_controller.clock_ticked.connect(func (_t1: int):
 		game_controller.send_creep(CutterCreep)
 	, ConnectFlags.CONNECT_ONE_SHOT)
-
-
-# (256, 123), floating=false), GridNodeStructure((243, 196),

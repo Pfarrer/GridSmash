@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dvjti002303jy"]
 
-[ext_resource type="Script" path="res://tests/scenes/single_player/single_player.gd" id="1_4xeha"]
+[ext_resource type="Script" uid="uid://irideb3iy2m8" path="res://tests/scenes/single_player/single_player.gd" id="1_4xeha"]
 
 [node name="SinglePlayer" type="Control"]
 layout_mode = 3

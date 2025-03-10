@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://jkd2sfyvjeo4"]
 
-[ext_resource type="Script" path="res://scenes/game/build_layer/build_layer.gd" id="2_8as1i"]
+[ext_resource type="Script" uid="uid://d17hqjdsibtow" path="res://scenes/game/build_layer/build_layer.gd" id="2_8as1i"]
 
 [node name="BuildLayer" type="Node2D"]
 modulate = Color(1, 1, 1, 0.501961)

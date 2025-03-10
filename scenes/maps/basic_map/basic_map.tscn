@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://tjq46r7fuyam"]
 
-[ext_resource type="Script" path="res://scenes/maps/basic_map/basic_map.gd" id="1_d67lw"]
-[ext_resource type="Script" path="res://scenes/maps/basic_map/map_area.gd" id="2_ukhvi"]
+[ext_resource type="Script" uid="uid://bopeno2rov4v5" path="res://scenes/maps/basic_map/basic_map.gd" id="1_d67lw"]
+[ext_resource type="Script" uid="uid://cmht7vojw3qof" path="res://scenes/maps/basic_map/map_area.gd" id="2_ukhvi"]
 
 [sub_resource type="Curve2D" id="Curve2D_cr0dw"]
 bake_interval = 30.0

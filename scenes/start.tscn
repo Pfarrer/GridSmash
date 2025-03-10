@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwy68w28i3dlx"]
 
-[ext_resource type="Script" path="res://scenes/single_player_container.gd" id="2_k42eg"]
+[ext_resource type="Script" uid="uid://cuv6y67umtrhh" path="res://scenes/single_player_container.gd" id="2_k42eg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_a2n4h"]
 font_size = 34
@@ -54,6 +54,7 @@ layout_mode = 2
 selected = 0
 item_count = 2
 popup/item_0/text = "Basic Map"
+popup/item_0/id = 0
 popup/item_1/text = "Spiral Map"
 popup/item_1/id = 1
 
@@ -80,6 +81,7 @@ layout_mode = 2
 selected = 0
 item_count = 1
 popup/item_0/text = "Basic Map"
+popup/item_0/id = 0
 
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer/MultiPlayerContainer"]
 layout_mode = 2

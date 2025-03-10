@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cngvbelacdc4p"]
 
-[ext_resource type="Script" path="res://scenes/structure/shockwave_affect/shockwave_affect.gd" id="1_ydd5k"]
+[ext_resource type="Script" uid="uid://83wxiogqxrqc" path="res://scenes/structure/shockwave_affect/shockwave_affect.gd" id="1_ydd5k"]
 
 [node name="ShockwaveAffect" type="Node2D"]
 z_index = -1

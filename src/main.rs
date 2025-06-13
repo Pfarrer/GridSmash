@@ -1,9 +1,10 @@
 use bevy::color::palettes::css::RED;
 use bevy::prelude::*;
-use bevy_rapier2d::prelude::*;
 use rand;
 use rand::Rng;
 use std::time::Duration;
+use avian2d::PhysicsPlugins;
+use avian2d::prelude::{Collider, CollisionEnded, CollisionEventsEnabled, CollisionStarted};
 
 #[derive(Resource)]
 struct SpawnTimer {
@@ -52,14 +53,16 @@ impl Default for PathFollow {
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
+        .add_plugins(PhysicsPlugins::default())
         .insert_resource(SpawnTimer {
-            timer: Timer::new(Duration::from_secs(2), TimerMode::Repeating),
+            timer: Timer::new(Duration::from_secs(1), TimerMode::Repeating),
         })
         .init_resource::<Map>()
         .add_systems(Startup, setup_graphics)
         .add_systems(Update, setup_curve)
         .add_systems(Update, spawn_system)
         .add_systems(Update, move_system)
+        .add_systems(Update, display_events)
         .run();
 }
 
@@ -107,17 +110,35 @@ fn creep_bundle(
     mut materials: ResMut<Assets<ColorMaterial>>,
     initial_position: Vec2,
 ) -> impl Bundle {
-    let mesh = meshes.add(Circle::new(20.0));
+    let mut rng = rand::rng();
+
+    let speed = rng.random_range(10. .. 500.);
+    let radius = 20.;
+
+    let mesh = meshes.add(Circle::new(radius));
     let color = Color::hsl(360., 0.95, 0.7);
     let material = materials.add(color);
 
-    let mut rng = rand::rng();
-
     (
-        Creep { speed: rng.random_range(200. .. 400.) },
+        Creep { speed },
         PathFollow::default(),
         Mesh2d(mesh),
         MeshMaterial2d(material),
         Transform::from_translation(initial_position.extend(0.0)),
+
+        Collider::circle(radius),
+        CollisionEventsEnabled::default(),
     )
+}
+
+fn display_events(
+    mut collision_started_events: EventReader<CollisionStarted>,
+    mut collision_ended_events: EventReader<CollisionEnded>,
+) {
+    for collision_event in collision_started_events.read() {
+        println!("  Received collision start event: {:?}", collision_event);
+    }
+    for collision_event in collision_ended_events.read() {
+        println!("X Received collision ended event: {:?}", collision_event);
+    }
 }

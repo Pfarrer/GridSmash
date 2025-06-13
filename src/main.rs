@@ -1,3 +1,4 @@
+use bevy::color::palettes::css::RED;
 use bevy::prelude::*;
 use bevy_rapier2d::prelude::*;
 use rand;
@@ -20,13 +21,14 @@ fn main() {
         .insert_resource(SpawnTimer {
             timer: Timer::new(Duration::from_secs(2), TimerMode::Repeating),
         })
-        .add_systems(Startup, init_system)
+        .add_systems(Startup, setup_graphics)
         .add_systems(Startup, setup_physics)
+        .add_systems(Update, setup_curve)
         .add_systems(Update, spawner_system)
         .run();
 }
 
-fn init_system(mut commands: Commands) {
+fn setup_graphics(mut commands: Commands) {
     commands.spawn(Camera2d::default());
 }
 
@@ -35,6 +37,22 @@ fn setup_physics(mut commands: Commands) {
         Collider::cuboid(500.0, 50.0),
         Transform::from_xyz(0.0, -200.0, 0.0),
     ));
+}
+
+fn setup_curve(mut gizmos: Gizmos) {
+    let points = vec![
+        vec2(-500., -200.),
+        vec2(-250., 250.),
+        vec2(250., 250.),
+        vec2(500., -200.),
+    ];
+    let curve = CubicCardinalSpline::new(0.3, points).to_curve().unwrap();
+
+    let resolution = 100 * curve.segments().len();
+    gizmos.linestrip(
+        curve.iter_positions(resolution).map(|pt| pt.extend(0.0)),
+        RED,
+    );
 }
 
 fn spawner_system(
